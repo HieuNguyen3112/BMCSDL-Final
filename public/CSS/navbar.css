@@ -1,0 +1,161 @@
+/* đổi .navbar → .site-navbar */
+.site-navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 60px;
+  background-color: #21222c;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* nội dung bên trái */
+.site-navbar .nav-left {
+  display: flex;
+  align-items: center;
+}
+.site-navbar .navbar-brand {
+  color: #f8f8f2;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.site-navbar .navbar-brand .gradient-text {
+  background: linear-gradient(90deg, #bd93f9, #ff79c6);
+  -webkit-background-clip: text;
+          background-clip: text;   
+  -webkit-text-fill-color: transparent;
+}
+
+/* search ở giữa */
+.site-navbar .nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.site-navbar .search-form {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+.site-navbar .search-form input {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background: #282a36;
+  color: #f8f8f2;
+}
+.site-navbar .search-form button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: #f8f8f2;
+  cursor: pointer;
+}
+
+/* 1) Container ban đầu chỉ bằng kích thước icon */
+.site-navbar .search-container {
+  display: flex;
+  align-items: center;
+  width: 40px;               /* chỉ đủ chỗ cho icon */
+  height: 36px;
+  overflow: hidden;
+  background: #282a36;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* 2) Input bị ẩn (width=0, opacity=0) */
+.site-navbar .search-container .search-input {
+  flex: 1;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #f8f8f2;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition:
+    width 0.3s ease 0.1s,
+    opacity 0.2s ease 0.1s;
+}
+
+/* 3) Icon luôn hiển thị, nằm trên input */
+.site-navbar .search-container .search-icon {
+  flex: none;
+  background: none;
+  border: none;
+  color: #f8f8f2;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 8px;
+  z-index: 1;
+}
+
+/* 4) Khi active → container mở rộng, input hiện */
+.site-navbar .search-container.active {
+  width: 240px;              /* chỉnh lại theo ý bạn */
+  padding-right: 4px;
+}
+
+.site-navbar .search-container.active .search-input {
+  width: 100%;
+  opacity: 1;
+  padding-left: 8px;
+}
+
+
+/* nội dung bên phải */
+.site-navbar .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.site-navbar .nav-link {
+  color: #f8f8f2;
+  text-decoration: none;
+}
+
+/* ================================
+   Base styles cho nút Đăng nhập
+   ================================ */
+   .site-navbar .btn-login {
+    background: linear-gradient(90deg, #bd93f9, #ff79c6);
+    color: #f8f8f2;
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 1.2rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(98, 114, 164, 0.4);
+    transition: all 0.3s ease;  /* ← quan trọng để hover mượt */
+  }
+  
+  /* ================================
+     Hover   (copy từ signin.css)
+     ================================ */
+  .site-navbar .btn-login:hover {
+    background: linear-gradient(90deg, #50fa7b, #8be9fd);
+    color: #282a36;
+    box-shadow: 0 6px 14px rgba(80, 250, 123, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  /* ================================
+     Active (copy từ signin.css)
+     ================================ */
+  .site-navbar .btn-login:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  

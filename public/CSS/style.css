@@ -1,0 +1,42 @@
+/* FORM CONTAINER */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #1e1f29;
+}
+
+body {
+  display: block;
+}
+
+.main-content {
+  margin-top: 60px;       
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+
+
+
+.card {
+  background-color: #282a36;
+  border-radius: 12px;
+  padding: 30px;
+  color: #f8f8f2;
+  box-shadow: 0 0 15px rgba(80, 250, 123, 0.15);
+}
+
+/* HEADER */
+.card h3 {
+  color: #8be9fd;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+
+
+

@@ -1,0 +1,180 @@
+/* signin.css */
+
+/* ===== Container chính ===== */
+.login-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+  
+  /* ===== Cột trái: Heading ===== */
+  .login-left {
+    flex: 1;
+    max-width: 50%;
+    color: #f8f8f2;
+    margin: auto;
+  }
+  .login-left h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: .5rem;
+  }
+  .gradient-text {
+    background: linear-gradient(90deg, #bd93f9, #ff79c6);
+    -webkit-background-clip: text;
+            background-clip: text;   
+    -webkit-text-fill-color: transparent;
+  }
+  .login-left .subtitle {
+    color: #6272a4;
+    font-size: 1rem;
+    margin-top: .5rem;
+  }
+  
+  /* ===== Cột phải: Card Form ===== */
+  .login-right {
+    flex: 1;
+    max-width: 50%;
+  }
+  .login-right .card {
+    background-color: #282a36;
+    border-radius: 12px;
+    padding: 30px;
+    color: #f8f8f2;
+    box-shadow: 0 0 15px rgba(80, 250, 123, 0.15);
+  }
+  .login-right .card h3 {
+    color: #8be9fd;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .login-right .form-label {
+    color: #bd93f9;
+  }
+  .login-right input[type="text"],
+  .login-right input[type="password"] {
+    background-color: #44475a;
+    border: none;
+    border-radius: 6px;
+    color: #f8f8f2;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .login-right input::placeholder {
+    color: rgba(248, 248, 242, 0.5);
+    font-style: italic;
+  }
+  
+  /* ===== Nút Đăng nhập ===== */
+  .login-right .d-grid {
+    margin-top: 2rem;
+  }
+  .login-right .btn-login {
+    background: linear-gradient(90deg, #bd93f9, #ff79c6);
+    color: #f8f8f2;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(98, 114, 164, 0.4);
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  .login-right .btn-login:hover {
+    background: linear-gradient(90deg, #50fa7b, #8be9fd);
+    color: #282a36;
+    box-shadow: 0 6px 14px rgba(80, 250, 123, 0.3);
+    transform: translateY(-2px);
+  }
+  .login-right .btn-login:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  .main-content {
+    margin-top: 60px;
+  }
+  
+  /* INPUT */
+  input[type="text"],
+  input[type="password"] {
+    background-color: #44475a;
+    border: none;
+    border-radius: 6px;
+    color: #f8f8f2;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  input::placeholder {
+    color: #bd93f9;
+  }
+  
+  /* BUTTON */
+  form button.btn-login {
+    background: linear-gradient(135deg, #6272a4, #bd93f9);
+    color: #f8f8f2;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(98, 114, 164, 0.4);
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  form button.btn-login:hover {
+    background: linear-gradient(135deg, #50fa7b, #8be9fd);
+    color: #282a36;
+    box-shadow: 0 6px 14px rgba(80, 250, 123, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  form button.btn-login:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* LINK ĐĂNG KÝ */
+  .card a {
+    color: #8be9fd;
+    text-decoration: none;
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 0.95em;
+  }
+  
+  .card a:hover {
+    color: #ff79c6;
+    text-decoration: underline;
+  }
+  
+  /* ===== mờ placeholder và styling text trong ô input ===== */
+  
+  /* màu text khi user nhập */
+  input[type="text"],
+  input[type="password"] {
+    color: #f8f8f2;          
+  }
+  
+  /* placeholder across browsers */
+  input::placeholder,
+  input::-webkit-input-placeholder,  
+  input::-moz-placeholder,          
+  input:-ms-input-placeholder,      
+  input:-moz-placeholder {           
+    color: rgba(248, 248, 242, 0.5);
+    font-style: italic;             
+  }
