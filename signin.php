@@ -41,7 +41,6 @@ require 'template/header.php';
   </div>
 </div>
 
-<?php require 'template/footer.php'; ?>
 <script>
   // khi DOM sẵn sàng
   document.addEventListener('DOMContentLoaded', () => {
@@ -61,3 +60,6 @@ require 'template/header.php';
     });
   });
 </script>
+
+<?php require 'template/footer.php'; ?>
+

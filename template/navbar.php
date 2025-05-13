@@ -11,18 +11,12 @@
     </a>
   </div>
   <div class="nav-center">
-    <form action="search.php" method="get" class="search-container">
-      <input
-        type="text"
-        name="q"
-        class="search-input"
-        placeholder="Search..."
-        autocomplete="off"
-      />
-      <button type="submit" class="search-icon" aria-label="Search">
-        <i class="fa fa-search"></i>
-      </button>
-    </form>
+  <form action="search.php" method="get" class="search-form">
+    <input type="text" name="q" placeholder="Search..." />
+    <button type="submit" aria-label="Search">
+      <i class="fa fa-search"></i>
+    </button>
+  </form>
   </div>
   <div class="nav-right">
     <a href="index.php" class="nav-link">Home</a>

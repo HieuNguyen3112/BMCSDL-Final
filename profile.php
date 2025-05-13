@@ -3,7 +3,10 @@ session_start();
 require 'template/header.php';
 ?>
 
+<link rel="stylesheet" href="public/css/sideBar.css">
 <link rel="stylesheet" href="public/css/profile.css">
+
+<?php require __DIR__ . '/template/sideBar.php'; ?>
 
 <div class="main-content">
   <div class="profile-container">
@@ -86,3 +89,4 @@ require 'template/header.php';
 require 'template/footer.php';
 ?>
 <script src="public/js/profile.js"></script>
+<script src="public/js/sideBar.js"></script>
