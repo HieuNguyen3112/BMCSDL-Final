@@ -1,0 +1,77 @@
+/* public/css/modal.css */
+
+/* Overlay mờ */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Ẩn nếu có .hidden */
+.modal-overlay.hidden {
+  display: none;
+}
+
+/* Container chính */
+.modal-content {
+  background: #282a36;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(50,50,100,0.5);
+  position: relative;
+}
+
+/* Nút đóng góc trên */
+.modal-close {
+  position: absolute;
+  top: 0.5rem; right: 0.75rem;
+  font-size: 1.5rem;
+  color: #f8f8f2;
+  cursor: pointer;
+}
+
+/* Icon phía trên */
+.modal-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #50fa7b; /* xanh success */
+}
+
+/* Tiêu đề */
+#modal-title {
+  margin: 0 0 0.5rem;
+  color: #bd93f9;
+}
+
+/* Nội dung */
+#modal-message {
+  color: #f8f8f2;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Nút OK */
+.modal-ok {
+  background: linear-gradient(90deg, #6272a4, #bd93f9);
+  color: #f8f8f2;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+.modal-ok:hover {
+  transform: translateY(-2px);
+}
+.modal-ok:active {
+  transform: scale(0.97);
+}

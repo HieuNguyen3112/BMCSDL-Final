@@ -11,8 +11,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- 3) Custom CSS -->
   <link rel="stylesheet" href="public/css/style.css">
-</head>
+  <link rel="stylesheet" href="public/css/modal.css">
+
+</head> 
 <body>
+  <?php require __DIR__ . '/modal.php'; ?>
   <?php include __DIR__ . '/navbar.php'; ?>
 
   <!-- Chuyển div thành main cho semantic và đóng đúng ở footer -->
