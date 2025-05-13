@@ -1,0 +1,150 @@
+/* Đẩy nội dung xuống sau navbar */
+.main-content {
+    margin-top: 60px;
+  }
+  
+  /* Centring container */
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  /* Form wrapper for animation */
+  .profile-form {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 700px;           /* giảm từ 800 → 700 */
+    background: #282a36;
+    border-radius: 8px;
+    padding: 1.5rem 0;          /* padding trên-dưới nhỏ lại */
+    box-shadow: 0 0 15px rgba(98,114,164,0.2);
+  }
+  
+  /* Title */
+  .profile-form h2 {
+    margin-bottom: 1.2rem;
+    color: #bd93f9;
+    text-align: center;
+  }
+  
+  /* Two-column grid */
+  .grid-2cols {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1rem 1.5rem;           /* giảm gap */
+  }
+  
+  /* Slider container: 2 steps side by side */
+  .form-slider {
+    display: flex;
+    width: 200%;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  /* Each step takes 50%, với padding “hít thở” */
+  .form-step {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+    padding: 0 1rem;            /* giảm padding ngang */
+  }
+  
+  /* Fields styling */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-group label {
+    margin-bottom: 0.4rem;
+    color: #8be9fd;
+    font-weight: 500;
+  }
+  .form-group input {
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background: #44475a;
+    color: #f8f8f2;
+    font-size: 0.95rem;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .form-group input:focus {
+    background: #3e3b62;
+    box-shadow: 0 0 0 2px rgba(98,114,164,0.5);
+    outline: none;
+  }
+  
+  /* Navigation area */
+  .form-navigation {
+    position: relative;
+    margin-top: 1.5rem;         /* giảm margin-top */
+    height: 48px;
+  }
+  
+  /* Arrow buttons */
+  .step-btn {
+    position: absolute;
+    top: 0;
+    width: 44px; height: 44px;  /* nhỏ hơn tí */
+    border: 2px solid rgba(98,114,164,0.5);
+    border-radius: 50%;
+    background: transparent;
+    color: #8be9fd;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, border-color 0.2s;
+  }
+  .step-btn:hover {
+    background: rgba(98,114,164,0.3);
+    transform: scale(1.15);
+    border-color: #50fa7b;
+  }
+  .step-btn:active {
+    transform: scale(1.05);
+  }
+  .btn-prev { left: 1rem; }      /* đẩy vào 1rem khỏi mép */
+  .btn-next { right: 1rem; }
+  
+  /* Save button */
+  .btn-save {
+    position: absolute;
+    left: 50%; bottom: 0;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg,#6272a4,#bd93f9);
+    color: #f8f8f2;
+    border: none;
+    padding: 0.65rem 1.8rem;     /* nhỏ lại tí */
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(98,114,164,0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-save:hover {
+    transform: translate(-50%,-3px);
+  }
+  .btn-save:active {
+    transform: translateX(-50%) scale(0.97);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  
+  /* Responsive: one column */
+  @media (max-width:768px) {
+    .grid-2cols { grid-template-columns:1fr; }
+    .form-navigation {
+      display: flex;
+      justify-content: space-between;
+      height: auto;
+      padding-top: 1rem;
+    }
+    .step-btn, .btn-save {
+      position: static;
+      transform: none;
+    }
+  }
+  

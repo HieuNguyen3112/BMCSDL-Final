@@ -30,7 +30,7 @@ require 'template/header.php';
                         <input type="password" name="password" class="form-control" placeholder="Mật khẩu của bạn" required>
                     </div>
                     <div class="d-grid">
-                        <button type="submit" class="btn-login">Đăng nhập</button>
+                        <button type="submit" class="btn-login" onclick="location.href='profile.php'">Đăng nhập</button>
                     </div>
                 </form>
             </div>
