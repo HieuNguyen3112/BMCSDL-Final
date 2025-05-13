@@ -92,4 +92,4 @@ require 'template/header.php';
 require 'template/footer.php';
 ?>
 
-<script src="public/js/sideBar.js"></script>
+<script src="public/js/sideBarEmployees.js"></script>

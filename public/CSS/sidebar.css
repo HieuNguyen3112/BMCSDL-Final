@@ -32,7 +32,7 @@ html, body {
   .sidebar-toggle {
     position: absolute;
     top: 1rem;
-    right: -14px;           /* đẩy ra ngoài để hiển thị nút */
+    right: -12px;           /* đẩy ra ngoài để hiển thị nút */
     width: 32px;
     height: 32px;
     background: #44475a;
