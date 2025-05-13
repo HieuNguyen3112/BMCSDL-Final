@@ -1,129 +1,151 @@
 /* ==== Ẩn thanh cuộn ngang toàn trang ==== */
-body {
-  overflow-x: hidden;
-}
-
-/* Khung ngoài của sidebar */
-.sidebar {
-  position: fixed;
-  top: 60px; /* cùng cao với navbar */
-  left: 0;
-  width: 240px;
-  height: calc(100vh - 60px);
-  background: #21222c;
-  border-right: 1px solid #44475a;
-  padding: 1rem 0;        /* chỉ padding dọc */
-  box-sizing: border-box;
-  transition: width 0.3s ease;
-  overflow-y: auto;       /* chỉ cuộn dọc */
-  overflow-x: visible;    /* cho phép icon vươn ra ngoài */
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Khi collapsed */
-.sidebar.collapsed {
-  width: 64px;
-  overflow-x: visible;    /* vẫn cho icon hiển thị */
-}
-
-/* Nút toggle */
-.sidebar-toggle {
-  position: absolute;
-  top: 1rem;
-  right: -14px;           /* đẩy ra ngoài */
-  width: 32px;
-  height: 32px;
-  background: #44475a;
-  border: 2px solid #bd93f9;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.2s;
-  z-index: 30;
-}
-.sidebar-toggle:hover {
-  background: #50fa7b;
-}
-.sidebar.collapsed .sidebar-toggle {
-  transform: rotate(180deg);
-}
-
-/* Danh sách */
-.sidebar-menu {
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Mỗi item */
-.sidebar-item {
-  margin-bottom: 0.5rem;
-}
-
-/* Link bên trong */
-.sidebar-item a {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* mặc định căn trái */
-  color: #f8f8f2;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: background 0.2s ease, color 0.2s ease;
-  overflow: visible; /* cho icon tự hiển thị */
-}
-
-/* Icon */
-.sidebar-item a i {
-  flex: none;
-  font-size: 1.4rem;
-  margin-right: 0.75rem;
-  color: #50fa7b;
-  transition: color 0.2s ease;
-  line-height: 1;
-  z-index: 5; /* đảm bảo hiển thị trên mọi thứ */
-}
-
-/* Text */
-.sidebar-text {
-  white-space: nowrap;
-  transition: opacity 0.3s ease;
-}
-
-/* Khi collapsed, chỉ còn icon và padding đều */
-.sidebar.collapsed .sidebar-text {
-  opacity: 0;
-}
-.sidebar.collapsed .sidebar-item a {
-  justify-content: center; /* icon căn giữa */
-  padding: 0.5rem 0.5rem;   /* giữ padding dọc + chút ngang để icon không bị sát mép */
-}
-.sidebar.collapsed .sidebar-item a i {
-  margin: 0;
-}
-
-/* Hover / Active */
-.sidebar-item a:hover,
-.sidebar-item.active a {
-  background: #44475a;
-  color: #bd93f9;
-}
-.sidebar-item.active a i {
-  color: #bd93f9;
-}
-
-/* Chỉnh lại scrollbar nếu cần */
-.sidebar::-webkit-scrollbar {
-  width: 6px;
-}
-.sidebar::-webkit-scrollbar-thumb {
-  background: rgba(98,114,164,0.5);
-  border-radius: 3px;
+html, body {
+    overflow-x: hidden;
+  }
+  
+  /* Khung ngoài của sidebar */
+  .sidebar {
+    position: fixed;
+    top: 60px; /* cùng cao với navbar */
+    left: 0;
+    width: 240px;
+    height: calc(100vh - 60px);
+    background: #21222c;
+    border-right: 1px solid #44475a;
+    padding: 1rem 0;        /* chỉ padding dọc */
+    box-sizing: border-box;
+    transition: width 0.3s ease;
+    overflow-y: auto;       /* chỉ cuộn dọc */
+    overflow-x: visible;    /* cho phép icon và toggle hiển thị */
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Khi collapsed */
+  .sidebar.collapsed {
+    width: 64px;
+    
+  }
+  
+  /* Nút toggle */
+  .sidebar-toggle {
+    position: absolute;
+    top: 1rem;
+    right: -14px;           /* đẩy ra ngoài để hiển thị nút */
+    width: 32px;
+    height: 32px;
+    background: #44475a;
+    border: 2px solid #bd93f9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.2s ease;
+    z-index: 30;
+  }
+  .sidebar-toggle:hover {
+    background: #50fa7b;
+  }
+  .sidebar.collapsed .sidebar-toggle {
+    transform: rotate(180deg);
+    right: -18px;
+  }
+  
+  /* Danh sách menu */
+  .sidebar-menu {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Mỗi mục menu */
+  .sidebar-item {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Link trong menu */
+  .sidebar-item a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* căn trái khi mở rộng */
+    color: #f8f8f2;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease, padding 0.3s ease;
+    overflow: visible; /* cho icon tự hiển thị */
+  }
+  
+  /* Icon trong link */
+  .sidebar-item a i {
+    flex: none;
+    font-size: 1.4rem;
+    margin-right: 0.75rem;
+    color: #50fa7b;
+    transition: color 0.2s ease, margin 0.3s ease;
+    line-height: 1;
+    z-index: 5; /* đảm bảo hiển thị trên hết */
+  }
+  
+  /* Text trong menu */
+  .sidebar-text {
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Khi collapsed: ẩn text, căn giữa icon */
+  .sidebar.collapsed .sidebar-text {
+    opacity: 0;
+    width: 0;
+    display: none;
+  }
+  .sidebar.collapsed .sidebar-item a {
+    justify-content: center; /* icon căn giữa */
+    padding: 0.5rem 0rem;   /* padding đều */
+  }
+  .sidebar.collapsed .sidebar-item a i {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+  
+  /* Hiệu ứng hover / active */
+  .sidebar-item a:hover,
+  .sidebar-item.active a {
+    background: #44475a;
+    color: #bd93f9;
+  }
+  .sidebar-item.active a i {
+    color: #bd93f9;
+  }
+  
+  /* Style thanh cuộn dọc của sidebar */
+  .sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .sidebar::-webkit-scrollbar-thumb {
+    background: rgba(98, 114, 164, 0.5);
+    border-radius: 3px;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 240px;
+    height: calc(100vh - 60px);
+    background: #21222c;
+    border-right: 1px solid #44475a;
+    padding: 1rem 0;
+    box-sizing: border-box;
+    transition: width 0.3s ease;
+    overflow-y: auto;       /* Chỉ cuộn dọc */
+    overflow-x: hidden;     /* Ẩn cuộn ngang */
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
 }

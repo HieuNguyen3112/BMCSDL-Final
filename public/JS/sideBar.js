@@ -1,11 +1,9 @@
-// public/js/sidebar.js
-document.addEventListener('DOMContentLoaded', () => {
-  const btn     = document.getElementById('sidebar-toggle');
-  const sidebar = document.querySelector('.sidebar');
-  const main    = document.querySelector('.main-content');
-
-  btn.addEventListener('click', () => {
+// sidebar.js
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('sidebar-toggle');
+  const sidebar = document.getElementById('app-sidebar');
+  
+  btn.addEventListener('click', function() {
     sidebar.classList.toggle('collapsed');
-    main.classList.toggle('collapsed');
   });
 });
