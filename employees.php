@@ -1,19 +1,18 @@
 <?php
 session_start();
 require 'template/header.php';
+require __DIR__ . '/template/sidebar.php';
 ?>
-
-<?php require __DIR__ . '/template/sidebar.php'; ?>
-
-<div class="main-content">
 
 <link rel="stylesheet" href="public/css/sidebar.css">
 <link rel="stylesheet" href="public/css/employees.css">
 
-<div class="employees-container">
+<div class="main-content shiftable">
+  <div class="employees-container">
     <h2>Danh sách thông tin nhân viên</h2>
     <div class="table-wrapper">
       <table class="employees-table">
+        <tbody>
         <thead>
           <tr>
             <th>STT</th>
@@ -82,16 +81,13 @@ require 'template/header.php';
             <td>Nhân viên</td>
             <td>Phòng IT</td>
           </tr>
-          <!-- ... thêm dòng khác nếu cần ... -->
         </tbody>
       </table>
     </div>
   </div>
-  <script src="public/js/sideBarEmployees.js"></script>
 </div>
 
-<?php
-require 'template/footer.php';
-?>
+<?php require 'template/footer.php'; ?>
 
-
+<script src="public/js/sidebar.js"></script>
+<script src="public/js/employees.js"></script>

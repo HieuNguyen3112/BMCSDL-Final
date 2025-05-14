@@ -2,19 +2,19 @@
 // sidebar.php
 ?>
 <aside id="app-sidebar" class="sidebar">
-  <button id="sidebar-toggle" class="sidebar-toggle">
+  <div id="sidebar-toggle" class="sidebar-toggle">
     <i class="fa fa-chevron-left"></i>
-  </button>
+  </div>
   <ul class="sidebar-menu">
-    <li class="sidebar-item<?php if (basename($_SERVER['PHP_SELF']) === 'profile.php') echo ' active'; ?>">
+    <li class="sidebar-item <?= ($active==='profile')?'active':'' ?>">
       <a href="profile.php">
         <i class="fa fa-user"></i>
         <span class="sidebar-text">Thông tin cá nhân</span>
       </a>
     </li>
-    <li class="sidebar-item<?php if (basename($_SERVER['PHP_SELF']) === 'employees.php') echo ' active'; ?>">
+    <li class="sidebar-item <?= ($active==='employees')?'active':'' ?>">
       <a href="employees.php">
-        <i class="fa fa-book"></i>
+        <i class="fa fa-list"></i>
         <span class="sidebar-text">Danh sách nhân viên</span>
       </a>
     </li>
@@ -26,3 +26,4 @@
     </li>
   </ul>
 </aside>
+

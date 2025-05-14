@@ -1,149 +1,71 @@
-/* public/css/employees.css */
+/* employees.css */
 
-/* Container chính */
-.employees-container {
-    padding: 1.5rem;
-    color: #f8f8f2;
-    justify-content: center !important; 
-    align-items: center !important;  
-    height: calc(100vh - 120px);
-    margin-left: 0; /* Đảm bảo không đè */
-    transition: margin-left 0.3s ease;
-  }
-  
-  /* Tiêu đề */
-  .employees-container h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: #bd93f9;
-    text-align: center;
-  }
-  
-  /* Wrapper cho table */
-  .table-wrapper {
-    background: #21222c;
-    padding: 1rem;
-    border-radius: 8px;
-    overflow-x: auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Bảng */
-  .employees-table {
-    width: auto;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin: auto;
-    min-width: 800px; /* đảm bảo đủ chỗ cho các cột */
-  }
-  
-  /* Header */
-  .employees-table thead tr {
-    background: #282a36;
-  }
-  .employees-table thead th {
-    padding: 0.75rem 1rem;
-    text-align: left;
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: #f8f8f2;
-    position: relative;
-  }
-  /* Border giữa các header */
-  .employees-table thead th + th {
-    border-left: 1px solid #44475a;
-  }
-  
-  /* Body rows */
-  .employees-table tbody tr {
-    background: #21222c;
-    transition: background 0.2s ease;
-  }
-  .employees-table tbody tr:nth-child(even) {
-    background: #232433;
-  }
-  .employees-table tbody tr:hover {
-    background: #44475a;
-  }
-  
-  /* Các ô */
-  .employees-table td {
-    padding: 0.6rem 1rem;
-    color: #f8f8f2;
-    font-size: 0.9rem;
-    border-top: 1px solid #44475a;
-  }
-  /* Border dọc */
-  .employees-table td + td {
-    border-left: 1px solid #44475a;
-  }
-  
-  /* Bo góc cho 4 góc của bảng */
-  .employees-table thead th:first-child {
-    border-top-left-radius: 6px;
-  }
-  .employees-table thead th:last-child {
-    border-top-right-radius: 6px;
-  }
-  .employees-table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 6px;
-  }
-  .employees-table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 6px;
-  }
-  
-  /* Responsive: ẩn bớt cột trên mobile */
-  @media (max-width: 768px) {
-    .table-wrapper {
-      padding: 0.5rem;
-    }
-    .employees-table {
-      min-width: 0;
-    }
-    .employees-table thead {
-      display: none;
-    }
-    .employees-table, .employees-table tbody, .employees-table tr, .employees-table td {
-      display: block;
-      width: 100%;
-    }
-    .employees-table tr {
-      margin-bottom: 1rem;
-    }
-    .employees-table td {
-      text-align: right;
-      padding-left: 50%;
-      position: relative;
-      border: none;
-      border-bottom: 1px solid #44475a;
-    }
-    .employees-table td::before {
-      content: attr(data-label);
-      position: absolute;
-      left: 1rem;
-      width: 45%;
-      white-space: nowrap;
-      font-weight: 500;
-      color: #bd93f9;
-    }
-  }
-  
-/* Đặt khoảng trống bên trái cho nội dung chính khi sidebar mở */
-.main-content {
+/* Khi sidebar ép vào, chỉ wrapper.shiftable mới lùi theo */
+.main-content.shiftable {
   margin-left: var(--sidebar-width);
   transition: margin-left 0.3s ease;
 }
-
-.sidebar.collapsed + .main-content {
-  margin-left: var(--sidebar-collapsed-width); /* Khoảng trống khi sidebar thu gọn */
+.main-content.shiftable.collapsed {
+  margin-left: var(--sidebar-collapsed-width);
 }
 
-.main-content.collapsed .employees-container {
-  margin-left: 0; /* Không lùi vào thêm */
+/* Container chính */
+.employees-container {
+  padding: 1.5rem;
+  color: #f8f8f2;
+  height: calc(100vh - 120px);
 }
 
-.main-content.collapsed .table-wrapper {
-  margin-left: 0;
+/* Tiêu đề */
+.employees-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #bd93f9;
+  text-align: center;
 }
+
+/* Wrapper cho table */
+.table-wrapper {
+  background: #21222c;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  margin: auto;
+}
+
+/* Bảng */
+.employees-table {
+  width: auto;
+  min-width: 800px;
+  margin: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.employees-table thead tr { background: #282a36; }
+.employees-table thead th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #f8f8f2;
+}
+.employees-table tbody tr { background: #21222c; }
+.employees-table tbody tr:nth-child(even) { background: #232433; }
+.employees-table tbody tr:hover { background: #44475a; }
+.employees-table td {
+  padding: 0.6rem 1rem;
+  color: #f8f8f2;
+  font-size: 0.9rem;
+  border-top: 1px solid #44475a;
+}
+.employees-table td + td { border-left: 1px solid #44475a; }
+
+/* Bo góc */
+.employees-table thead th:first-child { border-top-left-radius: 6px; }
+.employees-table thead th:last-child { border-top-right-radius: 6px; }
+.employees-table tbody tr:last-child td:first-child { border-bottom-left-radius: 6px; }
+.employees-table tbody tr:last-child td:last-child { border-bottom-right-radius: 6px; }
+
+/* Responsive (nếu cần) */
+@media (max-width:768px) { /* … giữ nguyên code responsive nếu có */ }

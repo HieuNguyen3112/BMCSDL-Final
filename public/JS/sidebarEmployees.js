@@ -1,21 +1,13 @@
-// public/js/sideBarEmployees.js
+// public/js/employees.js
 
-function initSidebar() {
-  const btnToggle = document.getElementById('sidebar-toggle');
-  const sidebar = document.getElementById('app-sidebar');
-  const content = document.querySelector('.main-content');
+document.addEventListener('DOMContentLoaded', () => {
+  const table = document.querySelector('.employees-table');
+  if (!table) return;
 
-  if (!btnToggle || !sidebar || !content) return;
-
-  // Đảm bảo sự kiện chỉ được bind một lần
-  btnToggle.removeEventListener('click', toggleSidebar);
-  btnToggle.addEventListener('click', toggleSidebar);
-
-  function toggleSidebar() {
-    sidebar.classList.toggle('collapsed');
-    content.classList.toggle('collapsed');
-  }
-}
-
-// Đảm bảo hàm được gọi ngay khi trang load
-document.addEventListener('DOMContentLoaded', initSidebar);
+  table.addEventListener('click', e => {
+    const row = e.target.closest('tr');
+    if (row && row.cells[1]) {
+      alert(`Bạn đã chọn nhân viên: ${row.cells[1].textContent}`);
+    }
+  });
+});

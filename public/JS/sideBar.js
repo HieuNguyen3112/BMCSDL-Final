@@ -1,9 +1,15 @@
+// public/js/sidebar.js
+
 document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('sidebar-toggle');
-  const sb  = document.getElementById('app-sidebar');
-  const mc  = document.querySelector('.main-content');
-  btn.addEventListener('click', () => {
-    sb.classList.toggle('collapsed');
-    mc.classList.toggle('collapsed');
+  const btnToggle = document.getElementById('sidebar-toggle');
+  const sidebar   = document.getElementById('app-sidebar');
+  // chỉ tìm wrapper nếu page có shiftable
+  const wrapper   = document.querySelector('.main-content.shiftable');
+
+  if (!btnToggle || !sidebar) return;
+
+  btnToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+    if (wrapper) wrapper.classList.toggle('collapsed');
   });
 });
