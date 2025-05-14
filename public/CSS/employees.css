@@ -7,6 +7,8 @@
     justify-content: center !important; 
     align-items: center !important;  
     height: calc(100vh - 120px);
+    margin-left: 0; /* Đảm bảo không đè */
+    transition: margin-left 0.3s ease;
   }
   
   /* Tiêu đề */
@@ -130,10 +132,18 @@
   
 /* Đặt khoảng trống bên trái cho nội dung chính khi sidebar mở */
 .main-content {
-  margin-left: 220px; /* Khoảng trống khi sidebar mở rộng */
+  margin-left: var(--sidebar-width);
   transition: margin-left 0.3s ease;
 }
 
 .sidebar.collapsed + .main-content {
-  margin-left: 64px; /* Khoảng trống khi sidebar thu gọn */
+  margin-left: var(--sidebar-collapsed-width); /* Khoảng trống khi sidebar thu gọn */
+}
+
+.main-content.collapsed .employees-container {
+  margin-left: 0; /* Không lùi vào thêm */
+}
+
+.main-content.collapsed .table-wrapper {
+  margin-left: 0;
 }

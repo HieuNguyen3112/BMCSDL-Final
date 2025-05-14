@@ -3,6 +3,11 @@ html, body {
     overflow-x: hidden;
   }
   
+:root {
+    --sidebar-width: 240px;
+    --sidebar-collapsed-width: 64px;
+  }
+  
   /* Khung ngoài của sidebar */
   .sidebar {
     position: fixed;
@@ -16,7 +21,7 @@ html, body {
     box-sizing: border-box;
     transition: width 0.3s ease;
     overflow-y: auto;       /* chỉ cuộn dọc */
-    overflow-x: visible;    /* cho phép icon và toggle hiển thị */
+    overflow-x: hidden;    /* cho phép icon và toggle hiển thị */
     z-index: 20;
     display: flex;
     flex-direction: column;
@@ -24,8 +29,7 @@ html, body {
   
   /* Khi collapsed */
   .sidebar.collapsed {
-    width: 64px;
-    
+    width: var(--sidebar-collapsed-width);
   }
   
   /* Nút toggle */
@@ -131,21 +135,4 @@ html, body {
     background: rgba(98, 114, 164, 0.5);
     border-radius: 3px;
   }
-  
-  .sidebar {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 240px;
-    height: calc(100vh - 60px);
-    background: #21222c;
-    border-right: 1px solid #44475a;
-    padding: 1rem 0;
-    box-sizing: border-box;
-    transition: width 0.3s ease;
-    overflow-y: auto;       /* Chỉ cuộn dọc */
-    overflow-x: hidden;     /* Ẩn cuộn ngang */
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-}
+

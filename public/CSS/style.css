@@ -37,6 +37,14 @@ body {
   margin-bottom: 25px;
 }
 
+.main-content {
+  margin-left: 240px;
+  transition: margin-left 0.3s ease;
+}
+.main-content.collapsed {
+  margin-left: 64px;
+}
+
 
 
 

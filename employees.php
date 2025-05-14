@@ -2,14 +2,15 @@
 session_start();
 require 'template/header.php';
 ?>
-<!-- CSS dành cho trang danh sách nhân viên -->
-<link rel="stylesheet" href="public/css/employees.css">
-<link rel="stylesheet" href="public/css/sideBar.css">
 
-<?php require __DIR__ . '/template/sideBar.php'; ?>
+<?php require __DIR__ . '/template/sidebar.php'; ?>
 
 <div class="main-content">
-  <div class="employees-container">
+
+<link rel="stylesheet" href="public/css/sidebar.css">
+<link rel="stylesheet" href="public/css/employees.css">
+
+<div class="employees-container">
     <h2>Danh sách thông tin nhân viên</h2>
     <div class="table-wrapper">
       <table class="employees-table">
@@ -86,10 +87,11 @@ require 'template/header.php';
       </table>
     </div>
   </div>
+  <script src="public/js/sideBarEmployees.js"></script>
 </div>
 
 <?php
 require 'template/footer.php';
 ?>
 
-<script src="public/js/sideBarEmployees.js"></script>
+

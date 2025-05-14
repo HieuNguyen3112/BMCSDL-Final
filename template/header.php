@@ -19,4 +19,4 @@
   <?php include __DIR__ . '/navbar.php'; ?>
 
   <!-- Chuyển div thành main cho semantic và đóng đúng ở footer -->
-  <main class="main-content">
+  <main>

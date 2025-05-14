@@ -45,19 +45,22 @@ require 'template/header.php';
   // khi DOM sẵn sàng
   document.addEventListener('DOMContentLoaded', () => {
     const frm = document.getElementById('login-form');
-
-    frm.addEventListener('submit', e => {
-      e.preventDefault();     // chặn gửi form lên server
-      // hiển thị modal thành công
-      DraculaModal.show({
-        title: 'Đăng nhập thành công',
-        message: 'Chào mừng bạn đã đăng nhập vào hệ thống!'
-      });
-      // sau 2s tự chuyển hướng sang profile.php
-      setTimeout(() => {
+    setTimeout(() => {
         window.location.href = 'profile.php';
       }, 2000);
-    });
+
+    // frm.addEventListener('submit', e => {
+    //   e.preventDefault();     // chặn gửi form lên server
+    //   // hiển thị modal thành công
+    //   DraculaModal.show({
+    //     title: 'Đăng nhập thành công',
+    //     message: 'Chào mừng bạn đã đăng nhập vào hệ thống!'
+    //   });
+    //   // sau 2s tự chuyển hướng sang profile.php
+    //   setTimeout(() => {
+    //     window.location.href = 'profile.php';
+    //   }, 2000);
+    // });
   });
 </script>
 

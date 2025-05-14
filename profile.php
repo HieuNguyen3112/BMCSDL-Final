@@ -3,12 +3,13 @@ session_start();
 require 'template/header.php';
 ?>
 
-<link rel="stylesheet" href="public/css/sidebar.css">
-<link rel="stylesheet" href="public/css/profile.css">
-
 <?php require __DIR__ . '/template/sidebar.php'; ?>
 
 <div class="main-content">
+
+<link rel="stylesheet" href="public/css/sidebar.css">
+<link rel="stylesheet" href="public/css/profile.css">
+
   <div class="profile-container">
     <section class="profile-form">
       <h2>Thông tin nhân viên</h2>
@@ -83,10 +84,12 @@ require 'template/header.php';
       </form>
     </section>
   </div>
+  <script src="public/js/profile.js"></script>
 </div>
 
-<script src="public/js/profile.js"></script>
+
 <script src="public/js/sidebar.js"></script>
+
 
 <?php
 require 'template/footer.php';
