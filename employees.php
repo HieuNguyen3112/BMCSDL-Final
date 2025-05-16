@@ -5,7 +5,7 @@ require 'template/header.php';
 
 <?php require __DIR__ . '/template/sidebar.php'; ?>
 
-<div class="main-content">
+<div class="main-content shiftable">
 
 <link rel="stylesheet" href="public/css/sidebar.css">
 <link rel="stylesheet" href="public/css/employees.css">
@@ -87,7 +87,7 @@ require 'template/header.php';
       </table>
     </div>
   </div>
-  <script src="public/js/sideBarEmployees.js"></script>
+  <script src="public/js/sidebarEmployees.js"></script>
 </div>
 
 <?php
