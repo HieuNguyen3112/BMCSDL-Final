@@ -1,53 +1,104 @@
-<?php 
-session_start();
-require 'template/header.php'; 
-?>
+<?php
+// controller/AuthController.php
+require_once __DIR__ . '/../model/UserModel.php';
 
-<div class="text-center mb-4">
-    <span class="heading-gradient">Nhóm 6</span>
-    <span class="heading-text"> - Quản lý nhân sự</span>
-</div>
+class AuthController
+{
+    protected $db;
+    protected $userModel;
 
-<div class="card p-4 shadow-lg" style="max-width: 400px; width:100%; background-color: #282a36; border-radius: 12px; color: #f8f8f2;">
-  <h3 class="text-center mb-4" style="color: #8be9fd;">Đăng Nhập</h3>
+    // Token TTL & refresh threshold (giây)
+    private $tokenTTL         = 900; // 15 phút
+    private $refreshThreshold = 300; // 5 phút
 
-  <?php if(!empty($_SESSION['error'])): ?>
-    <div class="alert alert-danger py-1">
-      <?= $_SESSION['error']; unset($_SESSION['error']); ?>
-    </div>
-  <?php endif; ?>
+    public function __construct($conn)
+    {
+        session_start();
+        $this->db        = $conn;
+        $this->userModel = new UserModel($conn);
+    }
 
-  <form action="./controller/AuthController.php" method="post">
-    <input type="hidden" name="action" value="login">
+    // Hiển thị form đăng nhập
+    public function showLogin()
+    {
+        // Trỏ đến file signin.php ở root
+        require __DIR__ . '/../signin.php';
+    }
 
-    <div class="mb-3">
-      <label class="form-label" style="color: #bd93f9;">Mã nhân viên</label>
-      <input 
-        type="text" 
-        name="username" 
-        class="form-control" 
-        style="background-color: #44475a; border: none; color: #f8f8f2;" 
-        placeholder="Mã nhân viên của bạn" 
-        required
-      >
-    </div>
+    // Xử lý POST đăng nhập
+    public function doLogin()
+    {
+        $maNV     = trim($_POST['maNV'] ?? '');
+        $password = trim($_POST['password'] ?? '');
 
-    <div class="mb-3">
-      <label class="form-label" style="color: #bd93f9;">Mật khẩu</label>
-      <input 
-        type="password" 
-        name="password" 
-        class="form-control" 
-        style="background-color: #44475a; border: none; color: #f8f8f2;" 
-        placeholder="Mật khẩu của bạn" 
-        required
-      >
-    </div>
+        if ($maNV === '' || $password === '') {
+            $error = 'Vui lòng nhập đầy đủ thông tin.';
+            require __DIR__ . '/../signin.php';
+            return;
+        }
 
-    <div class="d-grid">
-      <button type="submit" class="btn" style="background-color: #6272a4; color: #f8f8f2;">Đăng nhập</button>
-    </div>
-  </form>
-</div>
+        $user = $this->userModel->authenticate($maNV, $password);
+        if ($user) {
+            $_SESSION['user'] = $user;
+            $this->issueToken();
+            header('Location: index.php?action=profile');
+            exit;
+        } else {
+            $error = 'Sai mã nhân viên hoặc mật khẩu.';
+            require __DIR__ . '/../signin.php';
+        }
+    }
 
-<?php require 'template/footer.php'; ?>
+    // Trang thông tin cá nhân (profile)
+    public function profile()
+    {
+        // Nếu chưa login, redirect về login
+        if (empty($_SESSION['user'])) {
+            header('Location: index.php?action=login');
+            exit;
+        }
+        // Kiểm tra token
+        if (!$this->validateToken()) {
+            $this->logout();
+        }
+        // Gia hạn token nếu sắp hết
+        $this->maybeRefreshToken();
+
+        $user = $_SESSION['user'];
+        // Trỏ đến file profile.php ở root
+        require __DIR__ . '/../profile.php';
+    }
+
+    // Đăng xuất
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        header('Location: index.php?action=login');
+        exit;
+    }
+
+    // Sinh token và lưu expiry vào session
+    private function issueToken()
+    {
+        $_SESSION['token']     = bin2hex(random_bytes(16));
+        $_SESSION['token_exp'] = time() + $this->tokenTTL;
+    }
+
+    // Kiểm tra token còn hiệu lực?
+    private function validateToken()
+    {
+        return !empty($_SESSION['token'])
+            && !empty($_SESSION['token_exp'])
+            && time() < $_SESSION['token_exp'];
+    }
+
+    // Gia hạn token nếu còn ≤ refreshThreshold
+    private function maybeRefreshToken()
+    {
+        $remaining = $_SESSION['token_exp'] - time();
+        if ($remaining <= $this->refreshThreshold) {
+            $_SESSION['token_exp'] = time() + $this->tokenTTL;
+        }
+    }
+}

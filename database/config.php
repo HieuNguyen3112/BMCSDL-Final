@@ -2,7 +2,7 @@
 // config.php
 return [
   'host'     => 'localhost',     
-  'dbname'   => 'login_system',  
+  'dbname'   => 'demo_qlns',  
   'username' => 'root',          
   'password' => '123',              
   'charset'  => 'utf8mb4',

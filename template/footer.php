@@ -8,7 +8,7 @@
                 <div class="container d-flex flex-wrap align-items-center justify-content-between">
                 <div class="newsletter-text">
                     <small>NHÓM 6</small>
-                    <h4>BỘ TỨ BẢO MẬT</h4>
+                    <h5>QUẢN LÍ NHÂN SỰ</h5>
                 </div>
                 <form class="newsletter-form d-flex">
                     <input type="email" placeholder="Enter email address" required>
@@ -21,34 +21,35 @@
             <div class="footer-content container">
                 <div class="row">
                 <div class="col-md-3">
-                    <h5>COMPANY NAME</h5>
+                    <h5>BỘ TỨ BẢO MẬT</h5>
                     <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet.</p>
                 </div>
                 <div class="col-md-3">
-                    <h5>PRODUCTS</h5>
+                    <h5>CÔNG NGHỆ SỬ DỤNG</h5>
                     <ul class="list-unstyled">
-                    <li><a href="#">MDBootstrap</a></li>
-                    <li><a href="#">MDWordPress</a></li>
-                    <li><a href="#">BrandFlow</a></li>
-                    <li><a href="#">Bootstrap Angular</a></li>
+                    <li><a href="#">PHP</a></li>
+                    <li><a href="#">Javascript</a></li>
+                    <li><a href="#">CSS</a></li>
+                    <li><a href="#">Bootstrap</a></li>
+                    <li><a href="#">MySQL-MariaDB</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
-                    <h5>USEFUL LINKS</h5>
+                    <h5>THÀNH VIÊN NHÓM</h5>
                     <ul class="list-unstyled">
-                    <li><a href="#">Your Account</a></li>
-                    <li><a href="#">Become an Affiliate</a></li>
-                    <li><a href="#">Shipping Rates</a></li>
-                    <li><a href="#">Help</a></li>
+                    <li><a href="https://www.facebook.com/nguyen.hieu.449919">Nguyễn Minh Hiếu</a></li>
+                    <li><a href="https://www.facebook.com/quang.vinh.794988">Nguyễn Quang Vinh</a></li>
+                    <li><a href="https://www.facebook.com/danghuynhkhanhdoan974">Đàng Huỳnh Khánh Đoan</a></li>
+                    <li><a href="https://www.facebook.com/phat.thuan.77128">Trần Thuận Phát</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h5>CONTACT</h5>
                     <ul class="list-unstyled">
-                    <li><i class="fas fa-home me-2"></i>New York, NY 10012, US</li>
-                    <li><i class="fas fa-envelope me-2"></i>info@example.com</li>
-                    <li><i class="fas fa-phone me-2"></i>+01 234 567 88</li>
-                    <li><i class="fas fa-print me-2"></i>+01 234 567 89</li>
+                    <li><i class="fas fa-home me-2"></i>280 Đ. An Dương Vương, Phường 4, Quận 5, Hồ Chí Minh 720000</li>
+                    <li><i class="fas fa-envelope me-2"></i>zunpom2209@gmail.com</li>
+                    <li><i class="fas fa-phone me-2"></i>0703 544 084</li>
+                    <li><i class="fas fa-print me-2"></i>0703 544 084</li>
                     </ul>
                 </div>
                 </div>
@@ -56,7 +57,7 @@
 
             <!-- 4) Bottom copyright -->
             <div class="footer-bottom text-center">
-                &copy; 2025 Your Company. All rights reserved.
+                &copy; 2025 Bộ Tứ Bảo Mật. All rights reserved.
             </div>
         </footer>
     </body>

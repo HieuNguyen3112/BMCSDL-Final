@@ -1,5 +1,4 @@
 <?php
-// Bai02/model/database.php
 class Database {
     protected $conn;
 
