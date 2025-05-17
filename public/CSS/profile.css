@@ -1,9 +1,4 @@
-/* Đẩy nội dung xuống sau navbar */
-.main-content {
-    margin-top: 60px;
-  }
-  
-  /* Centring container */
+/* Centring container */
   .profile-container {
     display: flex;
     justify-content: center;

@@ -1,0 +1,95 @@
+/* ----- Footer (Soft Dracula style) ----- */
+.footer {
+  font-size: .9rem;
+  color: #f8f8f2;
+  background: #282a36;
+}
+
+/* 1) Newsletter */
+.footer-newsletter {
+  background: #21222c;
+  padding: 1.5rem 0;
+}
+.footer-newsletter .newsletter-text small {
+  color: #6272a4;
+  letter-spacing: .1em;
+}
+.footer-newsletter .newsletter-text h4 {
+  margin: 0;
+  color: #f8f8f2;
+}
+.footer-newsletter .newsletter-form {
+  border: 1px solid #44475a;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.footer-newsletter .newsletter-form input {
+  border: none;
+  background: #282a36;
+  color: #f8f8f2;
+  padding: .5rem 1rem;
+  min-width: 250px;
+}
+.footer-newsletter .newsletter-form input:focus {
+  outline: none;
+}
+.footer-newsletter .newsletter-form button {
+  background: #6272a4;
+  border: none;
+  color: #f8f8f2;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  transition: background .2s;
+}
+.footer-newsletter .newsletter-form button:hover {
+  background: #50fa7b;
+}
+
+/* 2) Main content */
+.footer-content {
+  padding: 2rem 0;
+}
+.footer-content h5 {
+  position: relative;
+  margin-bottom: 1rem;
+  color: #6272a4;
+}
+.footer-content h5::after {
+  content: '';
+  position: absolute;
+  bottom: -6px; left: 0;
+  width: 40px; height: 2px;
+  background: #50fa7b;
+}
+.footer-content a {
+  color: #8be9fd;
+  text-decoration: none;
+}
+.footer-content a:hover {
+  color: #50fa7b;
+}
+
+/* 4) Bottom */
+.footer-bottom {
+  background: #21222c;
+  padding: 1rem 0;
+  color: #6272a4;
+}
+
+footer {
+  margin-top: 60px;
+  padding: 24px 0 0 0;
+  /* Đảm bảo không có background trắng kéo dài */
+  background: #22223b; /* Hoặc màu của bạn */
+  color: #f8f8f2;
+  width: 100%;
+  position: relative;   /* hoặc absolute nếu bạn muốn */
+  z-index: 30;
+}
+
+.footer-newsletter,
+.footer-content,
+.footer-bottom {
+  position: relative;
+  z-index: 30;
+}

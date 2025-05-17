@@ -1,12 +1,6 @@
-<?php
-session_start();
-require 'template/header.php';
-?>
-
+<?php session_start(); require 'template/header.php'; ?>
 <?php require __DIR__ . '/template/sidebar.php'; ?>
-
 <div class="main-content">
-
 <link rel="stylesheet" href="public/css/sidebar.css">
 <link rel="stylesheet" href="public/css/profile.css">
 
@@ -14,7 +8,6 @@ require 'template/header.php';
     <section class="profile-form">
       <h2>Thông tin nhân viên</h2>
       <form id="emp-form" action="controller/EmployeeController.php" method="post">
-
         <!-- SLIDER WRAPPER -->
         <div class="form-slider">
           <!-- STEP 1 -->
