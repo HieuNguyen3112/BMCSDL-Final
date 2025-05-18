@@ -1,30 +1,22 @@
 <?php
-// index.php
+// public/index.php
+
+session_start();
+
+// --- Bỏ dòng này nếu không có vendor/autoload.php ---
+// require_once __DIR__ . '/../vendor/autoload.php';
+
+// Kết nối CSDL
 require_once __DIR__ . '/database/init.php';
-require_once __DIR__ . '/controller/AuthController.php';
 
-$auth   = new AuthController($conn);
-$action = $_GET['action'] ?? 'login';
+// Khởi tạo router
+require_once __DIR__ . '/vendor/bramus/router/src/Bramus/Router/Router.php';
+use Bramus\Router\Router;
 
-switch ($action) {
-    case 'login':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $auth->doLogin();
-        } else {
-            $auth->showLogin();
-        }
-        break;
+$router = new Router();
 
-    case 'profile':
-        $auth->profile();
-        break;
+// Nạp route
+require_once __DIR__ . '/router/web.php';
 
-    case 'logout':
-        $auth->logout();
-        break;
-
-    default:
-        header('HTTP/1.0 404 Not Found');
-        echo 'Không tìm thấy trang';
-        exit;
-}
+// Chạy router
+$router->run();

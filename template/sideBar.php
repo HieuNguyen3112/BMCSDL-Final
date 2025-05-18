@@ -19,10 +19,12 @@
       </a>
     </li>
     <li class="sidebar-item">
-      <a href="index.php?controller=logout">
+      <a href="#" id="logout-btn">
         <i class="fa fa-sign-out-alt"></i>
         <span class="sidebar-text">Đăng xuất</span>
       </a>
     </li>
   </ul>
 </aside>
+<script src="public/JS/modal.js"></script>
+<script src="public/JS/logoutAPI.js"></script>

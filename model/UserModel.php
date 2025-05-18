@@ -1,8 +1,8 @@
 <?php
 // model/UserModel.php
+
 class UserModel
 {
-    /** @var mysqli */
     protected $db;
 
     public function __construct(mysqli $conn)
@@ -11,25 +11,25 @@ class UserModel
     }
 
     /**
-     * Kiểm tra login, trả về mảng thông tin user (nhân viên) hoặc `null` nếu sai.
+     * Xác thực đăng nhập, trả về mảng user hoặc null nếu không hợp lệ
      */
     public function authenticate(string $maNV, string $password): ?array
     {
-        // hash mật khẩu như khi seed: SHA2_512('password' . MaNhanVien)
+        // Chỉ hash mỗi password (khớp với seed UNHEX(SHA2('123456',512)))
         $stmt = $this->db->prepare("
             SELECT nv.MaNhanVien, nv.HoTen, nv.MaPhong, nv.MaChucVu
             FROM TAIKHOAN tk
-            INNER JOIN NHANVIEN nv ON tk.MaNhanVien = nv.MaNhanVien
+            JOIN NHANVIEN nv ON nv.MaNhanVien = tk.MaNhanVien
             WHERE tk.MaNhanVien = ?
-              AND tk.MatKhau = UNHEX(SHA2(CONCAT(?, ?), 512))
+              AND tk.MatKhau = UNHEX(SHA2(?, 512))
             LIMIT 1
         ");
-        $stmt->bind_param('iss', $maNV, $password, $maNV);
+        // 'i' với maNV, 's' với password
+        $stmt->bind_param('is', $maNV, $password);
         $stmt->execute();
-        $res = $stmt->get_result();
+        $res  = $stmt->get_result();
         $user = $res->fetch_assoc();
         $stmt->close();
-
         return $user ?: null;
     }
 }

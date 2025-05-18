@@ -21,6 +21,7 @@
   <div class="nav-right">
     <a href="index.php" class="nav-link">Home</a>
     <a href="tasks.php" class="nav-link">Làm việc</a>
-    <button class="btn-login" onclick="location.href='signin.php'">Đăng nhập</button>
+    <button class="btn-login" id="nav-auth">Đăng nhập</button>
   </div>
 </nav>
+<script src="public/JS/authNavbar.js"></script>

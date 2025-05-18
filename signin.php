@@ -15,14 +15,13 @@ require 'template/header.php';
       <div class="card">
         <h3 class="text-center">Đăng Nhập</h3>
 
-        <?php if(!empty($_SESSION['error'])): ?>
+        <?php if (!empty($_SESSION['error'])): ?>
           <div class="alert alert-danger py-1">
             <?= $_SESSION['error']; unset($_SESSION['error']); ?>
           </div>
         <?php endif; ?>
 
-        <form id="login-form" action="./controller/AuthController.php" method="post">
-          <input type="hidden" name="action" value="login">
+        <form id="login-form">
           <div class="mb-3">
             <label class="form-label">Mã nhân viên</label>
             <input type="text" name="username" class="form-control" placeholder="Mã nhân viên của bạn" required>
@@ -41,25 +40,7 @@ require 'template/header.php';
   </div>
 </div>
 
-<script>
-  // khi DOM sẵn sàng
-  document.addEventListener('DOMContentLoaded', () => {
-    const frm = document.getElementById('login-form');
-
-    frm.addEventListener('submit', e => {
-      e.preventDefault();     // chặn gửi form lên server
-      // hiển thị modal thành công
-      DraculaModal.show({
-        title: 'Đăng nhập thành công',
-        message: 'Chào mừng bạn đã đăng nhập vào hệ thống!'
-      });
-      // sau 2s tự chuyển hướng sang profile.php
-      setTimeout(() => {
-        window.location.href = 'profile.php';
-      }, 2000);
-    });
-  });
-</script>
-
+<!-- Chỉ import duy nhất loginAPI.js -->
+<script src="public/js/modal.js"></script>
+<script src="public/JS/loginAPI.js"></script>
 <?php require 'template/footer.php'; ?>
-

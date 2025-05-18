@@ -1,6 +1,5 @@
             <script src="public/js/search.js"></script>
             <script src="public/js/pageTransition.js"></script>
-            <script src="public/js/modal.js"></script>
         </main>
         <footer class="footer">
             <!-- 1) Newsletter Subscription -->

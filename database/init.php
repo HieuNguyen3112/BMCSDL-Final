@@ -1,6 +1,6 @@
 <?php
 // config/init.php
-session_start();
+// session_start();
 
 // load cấu hình
 $config = require __DIR__ . '/config.php';

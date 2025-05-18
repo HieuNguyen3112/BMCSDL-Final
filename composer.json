@@ -1,0 +1,19 @@
+{
+    "name": "windows/bmcsdl-final",
+    "autoload": {
+        "psr-4": {
+            "Windows\\BmcsdlFinal\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "HieuNguyen3112",
+            "email": "zunpom2209@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "4.0",
+        "slim/psr7": "1.5",
+        "bramus/router": "^1.6"
+    }
+}

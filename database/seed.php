@@ -61,11 +61,11 @@ try {
     // 5) Seed TAIKHOAN dựa trên MaNhanVien vừa tạo (1–4)
     //    mật khẩu sẽ là UNHEX(SHA2('password'+id,512))
     $sql = "
-      INSERT INTO TAIKHOAN (MaNhanVien, MatKhau) VALUES
-        (1, UNHEX(SHA2(CONCAT('password','123456'),512))),
-        (2, UNHEX(SHA2(CONCAT('password','123456'),512))),
-        (3, UNHEX(SHA2(CONCAT('password','123456'),512))),
-        (4, UNHEX(SHA2(CONCAT('password','123456'),512)))
+        INSERT INTO TAIKHOAN (MaNhanVien, MatKhau) VALUES
+        (1, UNHEX(SHA2('123456',512))),
+        (2, UNHEX(SHA2('123456',512))),
+        (3, UNHEX(SHA2('123456',512))),
+        (4, UNHEX(SHA2('123456',512)))
     ";
     if (! $conn->query($sql)) {
         $errors[] = "TAIKHOAN: " . $conn->error;
