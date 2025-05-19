@@ -41,6 +41,5 @@ require 'template/header.php';
 </div>
 
 <!-- Chỉ import duy nhất loginAPI.js -->
-<script src="public/js/modal.js"></script>
 <script src="public/JS/loginAPI.js"></script>
 <?php require 'template/footer.php'; ?>

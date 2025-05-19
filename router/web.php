@@ -10,28 +10,16 @@ $router->setBasePath('/phpcoban/BMCSDL-Final');
 // Nạp controller
 require_once __DIR__ . '/../controller/AuthController.php';
 
-// API login
 $router->post('/api/login', function() use ($conn) {
-    header('Content-Type: application/json; charset=utf-8');
     (new AuthController($conn))->apiLogin();
 });
 
-// Web login form
-$router->get('/signin', function() use ($conn) {
-    (new AuthController($conn))->showLogin();
+// **API Logout** ← thêm cái này
+$router->get('/api/logout', function() use ($conn) {
+    (new AuthController($conn))->logout();
 });
 
-// Xử lý login form
-$router->post('/signin', function() use ($conn) {
-    (new AuthController($conn))->doLogin();
-});
-
-// Profile
-$router->get('/profile', function() use ($conn) {
-    (new AuthController($conn))->profile();
-});
-
-// Logout
+// (nếu bạn vẫn cần logout dạng form cũ)
 $router->get('/logout', function() use ($conn) {
     (new AuthController($conn))->logout();
 });

@@ -99,8 +99,33 @@ class AuthController
     // Đăng xuất: xóa session và chuyển về trang đăng nhập
     public function logout()
     {
+        // 1) Khởi động session nếu chưa
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+
+        // 2) Lấy header Authorization (nếu client gửi token Bearer)
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] 
+                    ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] 
+                    ?? '';
+
+        // 4) Xóa session
+        $_SESSION = [];
+        session_unset();
         session_destroy();
-        header('Location: /signin');
+
+        // 5) Nếu có Bearer token hoặc gọi API thì trả JSON kèm redirect
+        if (preg_match('/Bearer\s+(\S+)/i', $authHeader, $matches)) {
+            http_response_code(200);
+            header('Content-Type: application/json');
+            echo json_encode([
+                'message'  => 'Đăng xuất thành công',
+                'redirect' => '/phpcoban/BMCSDL-Final/signin.php'
+            ], JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+
+        header('Location: /phpcoban/BMCSDL-Final/signin.php');
         exit;
     }
 

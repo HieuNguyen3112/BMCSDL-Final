@@ -1,7 +1,12 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # nếu project nằm ở /phpcoban/BMCSDL-Final/
   RewriteBase /phpcoban/BMCSDL-Final/
+
+  # Nếu file hoặc folder không tồn tại thật
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^ index.php [L,QSA]
+
+  # Redirect mọi thứ về index.php (nơi bootstrap router của bạn)
+  RewriteRule ^ index.php [QSA,L]
 </IfModule>

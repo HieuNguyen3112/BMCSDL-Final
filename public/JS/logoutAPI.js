@@ -1,24 +1,38 @@
-// public/JS/logout.js
+// public/JS/logoutAPI.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Chọn nút logout (sẽ gắn id="logout-btn" vào <a> trong sidebar)
-    const logoutBtn = document.getElementById('logout-btn');
-    if (!logoutBtn) return;
-  
-    logoutBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-  
-      try {
-        // Gọi API logout
-        await fetch('/phpcoban/BMCSDL-Final/logout', {
-          method: 'GET',
-          credentials: 'include'
-        });
-      } catch (err) {
-        console.error('Lỗi khi logout:', err);
-      } finally {
-        // Chuyển về trang đăng nhập
-        window.location.href = 'signin.php';
-      }
+  document.body.addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-action="logout"], #logout-btn');
+    if (!btn) return;
+
+    e.preventDefault();
+    const token = localStorage.getItem('token') || '';
+    // Gọi API để destroy session
+    try {
+      await fetch('./logout', {
+        method: 'GET',
+        credentials: 'include'
+      });
+    } catch (err) {
+      console.error('Logout API error:', err);
+      DraculaModal.show({
+        title: 'Lỗi đăng xuất',
+        message: 'Không thể kết nối máy chủ.'
+      });
+      return;
+    }
+
+    // Xóa token cục bộ
+    localStorage.removeItem('token');
+
+    // Thông báo thành công
+    DraculaModal.show({
+      title: 'Đăng xuất thành công',
+      message: 'Bạn đã đăng xuất khỏi hệ thống.'
     });
+
+    // Redirect về signin, thay thế history
+    setTimeout(() => {
+      window.location.replace('signin.php');
+    }, 1500);
   });
-  
+});

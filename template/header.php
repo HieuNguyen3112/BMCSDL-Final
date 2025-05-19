@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="public/css/style.css">
   <link rel="stylesheet" href="public/css/modal.css">
   <link rel="stylesheet" href="public/css/footer.css">
+  <!-- 4) Script -->
 </head> 
 <body>
   <?php require __DIR__ . '/modal.php'; ?>

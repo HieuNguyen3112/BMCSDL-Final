@@ -1,5 +1,8 @@
             <script src="public/js/search.js"></script>
+            <script src="public/JS/modal.js"></script>
+            <script src="public/JS/logoutAPI.js"></script>
             <script src="public/js/pageTransition.js"></script>
+            <script src="public/JS/protectRoute.js"></script>
         </main>
         <footer class="footer">
             <!-- 1) Newsletter Subscription -->
