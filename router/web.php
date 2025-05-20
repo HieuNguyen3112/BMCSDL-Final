@@ -9,7 +9,13 @@ $router->setBasePath('/phpcoban/BMCSDL-Final');
 
 // Nạp controller
 require_once __DIR__ . '/../controller/AuthController.php';
+require_once __DIR__ . '/../controller/ProfileController.php';
 
+// Nạp middlewhare
+// require_once __DIR__ . '/../middleware/AuthMiddleware.php';
+// require_once __DIR__ . '/../middleware/RoleMiddleware.php';
+
+//Đăng nhập
 $router->post('/api/login', function() use ($conn) {
     (new AuthController($conn))->apiLogin();
 });
@@ -23,6 +29,25 @@ $router->get('/api/logout', function() use ($conn) {
 $router->get('/logout', function() use ($conn) {
     (new AuthController($conn))->logout();
 });
+
+//Profile
+// API lấy profile JSON
+$router->get('/api/profile', function() use ($conn) {
+    (new ProfileController($conn))->apiShow();
+});
+$router->put('/api/profile', function() use ($conn) {
+    (new ProfileController($conn))->apiUpdate();
+});
+
+// Web routes
+$router->get('/profile', function() use ($conn) {
+    (new ProfileController($conn))->show();
+});
+$router->get('/profile', function() use ($conn) {
+    (new ProfileController($conn))->show();
+});
+
+
 
 // 404
 $router->set404(function() {

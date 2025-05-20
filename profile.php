@@ -15,23 +15,23 @@
             <div class="grid-2cols">
               <div class="form-group">
                 <label for="emp_id">Mã nhân viên</label>
-                <input type="text" id="emp_id" name="emp_id" value="100000" readonly>
+                <input type="text" id="emp_id" name="emp_id" readonly>
               </div>
               <div class="form-group">
                 <label for="emp_name">Họ tên</label>
-                <input type="text" id="emp_name" name="emp_name" value="Nguyễn Văn Toàn">
+                <input type="text" id="emp_name" name="emp_name">
               </div>
               <div class="form-group">
                 <label>Giới tính</label>
-                <input type="text" name="gender" value="Nam">
+                <input type="text" name="gender">
               </div>
               <div class="form-group">
                 <label for="dob">Ngày sinh</label>
-                <input type="text" id="dob" name="dob" value="5/8/2024">
+                <input type="text" id="dob" name="dob">
               </div>
               <div class="form-group">
                 <label for="phone">Số điện thoại</label>
-                <input type="text" id="phone" name="phone" value="0123456789">
+                <input type="text" id="phone" name="phone">
               </div>
             </div>
           </div>
@@ -41,23 +41,23 @@
             <div class="grid-2cols">
               <div class="form-group">
                 <label for="salary">Lương</label>
-                <input type="text" id="salary" name="salary" value="19,000,000">
+                <input type="text" id="salary" name="salary" readonly>
               </div>
               <div class="form-group">
                 <label for="allowance">Phụ cấp</label>
-                <input type="text" id="allowance" name="allowance" value="2,400,000">
+                <input type="text" id="allowance" name="allowance" readonly>
               </div>
               <div class="form-group">
                 <label for="tax_id">Mã số thuế</label>
-                <input type="text" id="tax_id" name="tax_id" value="1225255529">
+                <input type="text" id="tax_id" name="tax_id" readonly>
               </div>
               <div class="form-group">
                 <label for="position">Tên chức vụ</label>
-                <input type="text" id="position" name="position" value="Nhân viên">
+                <input type="text" id="position" name="position" readonly>
               </div>
               <div class="form-group">
                 <label for="department">Tên phòng</label>
-                <input type="text" id="department" name="department" value="Phòng IT">
+                <input type="text" id="department" name="department" readonly>
               </div>
             </div>
           </div>
@@ -78,6 +78,8 @@
     </section>
   </div>
   <script src="public/js/profile.js"></script>
+  <script src="public/js/profileFetch.js"></script>
+  <script src="public/js/profileUpdate.js"></script>
 </div>
 
 

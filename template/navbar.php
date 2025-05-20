@@ -18,5 +18,6 @@
     <button id="nav-auth" class="btn-login">Đăng nhập</button>
   </div>
 </nav>
+<script src="public/JS/modal.js"></script>
 <script src="public/JS/authNavbar.js"></script>
 <script src="public/JS/logoutAPI.js"></script>

@@ -24,7 +24,8 @@
                 <div class="row">
                 <div class="col-md-3">
                     <h5>BỘ TỨ BẢO MẬT</h5>
-                    <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet.</p>
+                    <p>Đây là 1 dự án nhỏ của môn</br>học bảo mật cơ sở dữ liệu.</p>
+
                 </div>
                 <div class="col-md-3">
                     <h5>CÔNG NGHỆ SỬ DỤNG</h5>

@@ -1,0 +1,49 @@
+/* 1) Ẩn sidebar hoàn toàn */
+.sidebar {
+  display: none !important;
+}
+
+/* 2) Đẩy main-content cách navbar và tạo khoảng trống dưới để footer lùi xuống */
+.main-content.no-sidebar-page {
+  margin-left: 0;
+  padding-top: 100px;     /* cách navbar 30px */
+  margin-bottom: 30px;   /* cách footer 30px */
+  /* Ép min-height = full viewport – (header 60px + footer 60px) */
+  min-height: calc(100vh - 350px);
+}
+
+/* 3) Container căn giữa vertical + horizontal,
+      chiều cao 100% của .main-content */
+.workspace-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* 4) Thu nhỏ welcome-card */
+.welcome-card {
+  background: var(--card-bg);
+  padding: 1.5rem 2rem;
+  max-width: 350px;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+/* 5) Hiệu ứng gradient chạy cho text */
+.welcome-card h1 {
+  font-size: 2rem;
+  background: linear-gradient(90deg, #8be9fd, #ff79c6, #50fa7b);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
