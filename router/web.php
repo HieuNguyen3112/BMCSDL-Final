@@ -10,7 +10,7 @@ $router->setBasePath('/phpcoban/BMCSDL-Final');
 // Nạp controller
 require_once __DIR__ . '/../controller/AuthController.php';
 require_once __DIR__ . '/../controller/ProfileController.php';
-
+require_once __DIR__ . '/../controller/EmployeeController.php';
 // Nạp middlewhare
 // require_once __DIR__ . '/../middleware/AuthMiddleware.php';
 // require_once __DIR__ . '/../middleware/RoleMiddleware.php';
@@ -25,26 +25,17 @@ $router->get('/api/logout', function() use ($conn) {
     (new AuthController($conn))->logout();
 });
 
-// (nếu bạn vẫn cần logout dạng form cũ)
-$router->get('/logout', function() use ($conn) {
-    (new AuthController($conn))->logout();
+// API danh sách nhân viên & trưởng phòng
+$router->get('/api/employees/nhanvien', function() use ($conn) {
+    (new EmployeeController($conn))->apiListRoleNhanVien();
 });
 
-//Profile
-// API lấy profile JSON
+// API lấy profile cá nhân JSON
 $router->get('/api/profile', function() use ($conn) {
     (new ProfileController($conn))->apiShow();
 });
 $router->put('/api/profile', function() use ($conn) {
     (new ProfileController($conn))->apiUpdate();
-});
-
-// Web routes
-$router->get('/profile', function() use ($conn) {
-    (new ProfileController($conn))->show();
-});
-$router->get('/profile', function() use ($conn) {
-    (new ProfileController($conn))->show();
 });
 
 
