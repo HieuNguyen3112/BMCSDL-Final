@@ -38,6 +38,15 @@ $router->put('/api/profile', function() use ($conn) {
     (new ProfileController($conn))->apiUpdate();
 });
 
+// API cập nhật thông tin nhân viên
+$router->put('/api/employees/update', function() use ($conn) {
+    (new EmployeeController($conn))->apiUpdate();
+});
+
+// API tạo nhân viên
+$router->post('/api/employees/create', function() use ($conn) {
+    (new EmployeeController($conn))->apiCreate();
+});
 
 
 // 404

@@ -39,19 +39,19 @@ class ProfileController
         }
 
         $maNV = (int) $_SESSION['user']['MaNhanVien'];
-        $user = $this->userModel->getById($maNV);
-        if (! $user) {
+        $userInfo = $this->userModel->getById($maNV);
+        if (! $userInfo) {
             http_response_code(404);
-            echo json_encode(['error' => 'User not found']);
+            echo json_encode(['success'=>false,'error'=>'User not found'], JSON_UNESCAPED_UNICODE);
             exit;
         }
 
-        // Loại bỏ các trường nhạy cảm nếu cần, ví dụ mật khẩu...
-        unset($user['MatKhau']);
+        // **CHỖ NÀY**: thêm role từ session vào kết quả trả về
+        $userInfo['TenRole'] = $_SESSION['user']['TenRole'];
 
         echo json_encode([
             'success' => true,
-            'data'    => $user
+            'data'    => $userInfo
         ], JSON_UNESCAPED_UNICODE);
     }
 

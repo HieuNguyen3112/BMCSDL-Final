@@ -13,7 +13,8 @@ try {
       INSERT INTO PHONGBAN (TenPhong) VALUES
         ('Phòng nhân sự'),
         ('Phòng tài vụ'),
-        ('Phòng giám đốc')
+        ('Phòng giám đốc'),
+        ('Phòng IT')
     ";
     if (! $conn->query($sql) && strpos($conn->error, 'Duplicate') === false) {
         $errors[] = "PHONGBAN: " . $conn->error;
@@ -44,11 +45,11 @@ try {
         (HoTen, GioiTinh, NgaySinh, SoDienThoai, Luong, PhuCap, MaSoThue, MaChucVu, MaPhong)
       VALUES
         ('Nguyễn Minh Hiếu', 'Nam', '2004-12-31', '0123456789',
-          '19000000', '2400000', '123456789', 1, 1),
+          '19000000', '2400000', '123456789', 1, 4),
         ('Trần Đình Trọng', 'Nam', '1998-03-27', '0987654321',
           '21000000', '2500000', '8563489385', 2, 2),
         ('Đoàn Văn Hậu',    'Nam', '1999-03-12', '0912345678',
-          '18500000', '2200000', '9638284638', 1, 1),
+          '18500000', '2200000', '9638284638', 1, 4),
         ('Hồ Xuân Nga',     'Nữ',  '1990-02-01', '0901234567',
           '20000000', '2300000', '3483748774', 1, 3)
     ";

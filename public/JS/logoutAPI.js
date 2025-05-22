@@ -5,34 +5,51 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!btn) return;
 
     e.preventDefault();
-    const token = localStorage.getItem('token') || '';
-    // Gọi API để destroy session
+
     try {
-      await fetch('./logout', {
+      // Gọi đúng tới route /api/logout
+      const resp = await fetch('api/logout', {
         method: 'GET',
         credentials: 'include'
       });
+
+      // Nếu server trả về lỗi HTTP
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status}`);
+      }
+
+      const contentType = resp.headers.get('Content-Type') || '';
+      // Xóa token cục bộ trước để chắc chắn
+      localStorage.removeItem('token');
+
+      // Nếu là API trả JSON (có Bearer token)
+      if (contentType.includes('application/json')) {
+        const body = await resp.json();
+        DraculaModal.show({
+          title: 'Đăng xuất thành công',
+          message: body.message || 'Bạn đã đăng xuất khỏi hệ thống.'
+        });
+        setTimeout(() => {
+          // redirect theo server trả về
+          window.location.replace(body.redirect || 'signin.php');
+        }, 1200);
+      } else {
+        // Trường hợp header('Location: …')—fetch sẽ follow và trả HTML
+        DraculaModal.show({
+          title: 'Đăng xuất thành công',
+          message: 'Bạn đã đăng xuất khỏi hệ thống.'
+        });
+        setTimeout(() => {
+          window.location.replace('signin.php');
+        }, 1200);
+      }
+
     } catch (err) {
-      console.error('Logout API error:', err);
+      console.error('Lỗi khi gọi logout API:', err);
       DraculaModal.show({
         title: 'Lỗi đăng xuất',
-        message: 'Không thể kết nối máy chủ.'
+        message: 'Không thể kết nối tới server.'
       });
-      return;
     }
-
-    // Xóa token cục bộ
-    localStorage.removeItem('token');
-
-    // Thông báo thành công
-    DraculaModal.show({
-      title: 'Đăng xuất thành công',
-      message: 'Bạn đã đăng xuất khỏi hệ thống.'
-    });
-
-    // Redirect về signin, thay thế history
-    setTimeout(() => {
-      window.location.replace('signin.php');
-    }, 1500);
   });
 });

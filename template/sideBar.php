@@ -18,6 +18,12 @@
         <span class="sidebar-text">Danh sách nhân viên</span>
       </a>
     </li>
+    <li id="nav-create-employee" class="sidebar-item<?php if (basename($_SERVER['PHP_SELF']) === 'createEmployee.php') echo ' active'; ?>">
+      <a href="createEmployee.php">
+        <i class="fa fa-plus-square"></i>
+        <span class="sidebar-text">Tạo mới nhân viên</span>
+      </a>
+    </li>
     <li class="sidebar-item">
       <a href="#" id="logout-btn" data-action="logout">
         <i class="fa fa-sign-out-alt"></i>
@@ -27,3 +33,7 @@
   </ul>
 </aside>
 <script src="public/JS/modal.js"></script>
+<script src="public/JS/createEmployeeSidebar.js"></script>
+<script src="public/JS/logoutAPI.js"></script>
+
+

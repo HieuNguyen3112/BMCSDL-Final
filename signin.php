@@ -30,6 +30,32 @@ require 'template/header.php';
             <label class="form-label">Mật khẩu</label>
             <input type="password" name="password" class="form-control" placeholder="Mật khẩu của bạn" required>
           </div>
+
+          <!-- ==== Custom Combobox Vai trò ==== -->
+          <div class="mb-3">
+            <label class="form-label">Vai trò</label>
+            <div class="custom-select-wrapper">
+              <div class="custom-select" id="role-select">
+                <div class="custom-select__trigger">
+                  <span>Chọn vai trò đăng nhập</span>
+                  <div class="arrow"></div>
+                </div>
+                <div class="custom-options" required>
+                  <span class="custom-option" data-value="NhanVienRole">Nhân viên</span>
+                  <span class="custom-option" data-value="TruongPhongRole">Trưởng phòng</span>
+                  <span class="custom-option" data-value="NhanVienNhanSuRole">NV Phòng nhân sự</span>
+                  <span class="custom-option" data-value="TruongPhongNhanSuRole">TP Phòng nhân sự</span>
+                  <span class="custom-option" data-value="NhanVienTaiVuRole">NV Phòng tài vụ</span>
+                  <span class="custom-option" data-value="GiamDocRole">Giám đốc</span>
+                </div>
+              </div>
+              <!-- hidden input để formData.get('role') vẫn hoạt động -->
+              <input type="hidden" name="role" id="role-input" value="">
+            </div>
+          </div>
+          <!-- ========================== -->
+
+
           <div class="d-grid">
             <button type="submit" class="btn-login">Đăng nhập</button>
           </div>
@@ -41,5 +67,6 @@ require 'template/header.php';
 </div>
 
 <!-- Chỉ import duy nhất loginAPI.js -->
+<script src="public/JS/dropdownLogin.js"></script>
 <script src="public/JS/loginAPI.js"></script>
 <?php require 'template/footer.php'; ?>

@@ -24,11 +24,17 @@ class UserModel
     public function authenticate(string $maNV, string $password): ?array
     {
         $sql = "
-            SELECT nv.MaNhanVien, nv.HoTen, nv.MaPhong, nv.MaChucVu
+            SELECT 
+              nv.MaNhanVien,
+              nv.HoTen,
+              nv.MaPhong,
+              nv.MaChucVu,
+              cv.TenRole
             FROM TAIKHOAN tk
-            JOIN NHANVIEN nv ON nv.MaNhanVien = tk.MaNhanVien
+            JOIN NHANVIEN  nv ON nv.MaNhanVien = tk.MaNhanVien
+            JOIN CHUCVU   cv ON nv.MaChucVu   = cv.MaChucVu
             WHERE tk.MaNhanVien = ?
-              AND tk.MatKhau = UNHEX(SHA2(?, 512))
+              AND tk.MatKhau     = UNHEX(SHA2(?,512))
             LIMIT 1
         ";
 
@@ -43,7 +49,7 @@ class UserModel
     }
 
     /**
-     * Lấy thông tin 1 user theo id
+     * Lấy thông tin 1 user theo id (đã giải mã Luong/PhuCap và format NgaySinh)
      *
      * @param int $maNV
      * @return array|null
@@ -52,30 +58,36 @@ class UserModel
     {
         $sql = "
             SELECT 
-            nv.MaNhanVien,
-            nv.HoTen,
-            nv.GioiTinh,
-            nv.NgaySinh,
-            nv.SoDienThoai,
-            nv.Luong,
-            nv.PhuCap,
-            nv.MaSoThue,
-            cv.TenChucVu,    -- tên chức vụ
-            pb.TenPhong      -- tên phòng ban
+                nv.MaNhanVien,
+                nv.HoTen,
+                nv.GioiTinh,
+                nv.NgaySinh,
+                nv.SoDienThoai,
+                -- giải mã AES ngay trong SELECT, ép về CHAR(20)
+                CAST(AES_DECRYPT(nv.Luong,  'nhom6') AS CHAR(20)) AS Luong,
+                CAST(AES_DECRYPT(nv.PhuCap, 'nhom6') AS CHAR(20)) AS PhuCap,
+                nv.MaSoThue,
+                cv.TenChucVu,    -- tên chức vụ
+                pb.TenPhong      -- tên phòng ban
             FROM nhanvien nv
             LEFT JOIN chucvu    cv ON nv.MaChucVu  = cv.MaChucVu
-            LEFT JOIN phongban pb ON nv.MaPhong    = pb.MaPhong
+            LEFT JOIN phongban  pb ON nv.MaPhong    = pb.MaPhong
             WHERE nv.MaNhanVien = ?
+            LIMIT 1
         ";
 
         $stmt = $this->conn->prepare($sql);
+        if (! $stmt) {
+            // Có thể log lỗi: $this->conn->error
+            return null;
+        }
         $stmt->bind_param('i', $maNV);
         $stmt->execute();
         $res = $stmt->get_result();
-        $row = $res->fetch_assoc();
+        $row = $res->fetch_assoc() ?: null;
         $stmt->close();
 
-        return $row ?: null;
+        return $row;
     }
 
     /**

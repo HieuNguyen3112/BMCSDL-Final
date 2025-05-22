@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const data = result.data;
-    // ✅ Điền đúng ID từ HTML gốc
     document.getElementById('emp_id').value     = data.MaNhanVien;
     document.getElementById('emp_name').value   = data.HoTen;
     document.querySelector('input[name="gender"]').value = data.GioiTinh;

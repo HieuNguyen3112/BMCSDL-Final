@@ -3,6 +3,7 @@
 <div class="main-content">
 <link rel="stylesheet" href="public/css/sidebar.css">
 <link rel="stylesheet" href="public/css/profile.css">
+<link rel="stylesheet" href="public/css/createEmployee.css">
 
   <div class="profile-container">
     <section class="profile-form">

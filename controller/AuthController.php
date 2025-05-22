@@ -52,35 +52,54 @@ class AuthController
     // Xử lý đăng nhập API (nhận JSON)
     public function apiLogin()
     {
-        // Lấy dữ liệu JSON từ request body
+        header('Content-Type: application/json; charset=utf-8');
+        // đọc body
         $input = json_decode(file_get_contents('php://input'), true);
-        $maNV     = trim($input['maNV'] ?? '');
+        $maNV     = trim($input['maNV']     ?? '');
         $password = trim($input['password'] ?? '');
+        $role     = trim($input['role']     ?? '');
 
-        // Kiểm tra dữ liệu đầu vào
-        if ($maNV === '' || $password === '') {
+        // 1) validate bắt buộc
+        if ($maNV === '' || $password === '' || $role === '') {
             http_response_code(400);
-            echo json_encode(['error' => 'Vui lòng nhập đầy đủ thông tin.']);
+            echo json_encode([
+                'success' => false,
+                'error'   => 'Vui lòng nhập đầy đủ mã NV, mật khẩu và chọn vai trò.'
+            ], JSON_UNESCAPED_UNICODE);
             return;
         }
 
-        // Gọi model để xác thực
+        // 2) xác thực credentials
         $user = $this->userModel->authenticate($maNV, $password);
-        if ($user) {
-            // Đăng nhập thành công, lưu thông tin và tạo token
-            $_SESSION['user'] = $user;
-            $this->issueToken();
-            // Trả về kết quả JSON gồm token và thời hạn
-            echo json_encode([
-                'success' => true,
-                'token'   => $_SESSION['token'],
-                'expires' => $_SESSION['token_exp']
-            ]);
-        } else {
-            // Đăng nhập thất bại
+        if (! $user) {
             http_response_code(401);
-            echo json_encode(['error' => 'Sai mã nhân viên hoặc mật khẩu.']);
+            echo json_encode([
+                'success' => false,
+                'error'   => 'Mã NV hoặc mật khẩu không đúng.'
+            ], JSON_UNESCAPED_UNICODE);
+            return;
         }
+
+        // 3) so khớp vai trò
+        //   giả sử UserModel::authenticate trả về ['MaNhanVien', 'HoTen', ..., 'TenRole']
+        if ($user['TenRole'] !== $role) {
+            http_response_code(403);
+            echo json_encode([
+                'success' => false,
+                'error'   => 'Vai trò không khớp.'
+            ], JSON_UNESCAPED_UNICODE);
+            return;
+        }
+
+        // 4) nếu hợp lệ, issue token và trả về
+        $_SESSION['user']  = $user;
+        $this->issueToken();  // phương thức của bạn vẫn dùng
+        echo json_encode([
+            'success' => true,
+            'token'   => $_SESSION['token'],
+            'expires' => $_SESSION['token_exp'],
+            'data'    => $user
+        ], JSON_UNESCAPED_UNICODE);
     }
 
     // Trang thông tin cá nhân (chỉ cho phép nếu đã đăng nhập)

@@ -4,6 +4,9 @@
 .main-content.shiftable {
   margin-left: var(--sidebar-width);
   transition: margin-left 0.3s ease;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 .main-content.shiftable.collapsed {
   margin-left: var(--sidebar-collapsed-width);
@@ -13,7 +16,9 @@
 .employees-container {
   padding: 1.5rem;
   color: #f8f8f2;
-  height: calc(100vh - 250px);
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
 }
 
 /* Tiêu đề */
@@ -30,6 +35,16 @@
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  margin: auto;
+  background: #21222c;
+  padding: 1rem;
+  border-radius: 8px;
+  /* bật scroll cả ngang lẫn dọc */
+  overflow-x: auto;
+  overflow-y: auto;
+  /* giới hạn chiều cao sao cho vẫn thấy header + footer */
+  max-height: calc(100vh - 250px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
   margin: auto;
 }
@@ -70,3 +85,219 @@
 /* Responsive (nếu cần) */
 @media (max-width:768px) { /* … giữ nguyên code responsive nếu có */ }
 
+/* Modal hiển thị thông tin */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+.modal-overlay.open {
+  display: flex;
+}
+.modal-content {
+  background: #282a36;
+  color: #f8f8f2;
+  padding: 20px 30px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  position: relative;
+}
+.modal-content h3 {
+  margin-top: 0;
+  color: #8be9fd;
+}
+.modal-body p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: transparent;
+  border: none;
+  color: #ff79c6;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Nút Xem/Sửa */
+.action-btn {
+  background: #bd93f9;
+  color: #282a36;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.action-btn:hover {
+  background: #ff79c6;
+}
+
+/* chung cho cả 2 modal (infoModal & editModal) */
+.modal-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-overlay.open {
+  display: flex;
+}
+
+/* nội dung modal */
+.modal-content {
+  background: #282a36;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 15px rgba(98,114,164,0.3);
+}
+/* nút đóng */
+.modal-content .close-btn {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #f8f8f2;
+  cursor: pointer;
+}
+/* tiêu đề */
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #bd93f9;
+  text-align: center;
+}
+
+/* form bên trong */
+.modal-content form .grid-2cols {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.modal-content form .form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #8be9fd;
+  font-weight: 500;
+}
+.modal-content form .form-group input,
+.modal-content form .form-group select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background: #44475a;
+  color: #f8f8f2;
+  font-size: 0.95rem;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.modal-content form .form-group input:focus,
+.modal-content form .form-group select:focus {
+  background: #3e3b62;
+  box-shadow: 0 0 0 2px rgba(98,114,164,0.5);
+  outline: none;
+}
+
+/* nút lưu */
+.modal-content form .btn-save {
+  display: block;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #6272a4, #bd93f9);
+  color: #f8f8f2;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(98,114,164,0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.modal-content form .btn-save:hover {
+  transform: translateY(-2px);
+}
+.modal-content form .btn-save:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* responsive nhỏ màn hình */
+@media (max-width: 768px) {
+  .modal-content form .grid-2cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*==================ScrollBar bảng employee====================*/
+/* === custom scrollbar cho bảng === */
+/* chỉ Firefox mới vào đây */
+@supports (scrollbar-color: auto) {
+  .table-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: #6272a4 #2b2e3c;
+  }
+}
+
+/* Webkit browsers (Chrome, Edge, Safari...) */
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #2b2e3c;
+  border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #6272a4;
+  border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #bd93f9;
+}
+
+/* ——————————————————————————
+   Vẽ đường kẻ dọc giữa các cột header
+   —————————————————————————— */
+   .employees-table thead th {
+    /* Vạch chắn bên phải mỗi th, trừ cái cuối */
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  
+  .employees-table thead th:last-child {
+    border-right: none;
+  }
+  
+  /* Optional: thêm nét chia giữa cả các ô dữ liệu */
+  .employees-table tbody td {
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .employees-table tbody td:last-child {
+    border-right: none;
+  }
+  
+  /* Nét chân header đậm hơn */
+  .employees-table thead {
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+  }
+  
