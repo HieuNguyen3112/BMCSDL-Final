@@ -1,62 +1,51 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const frm = document.getElementById('login-form');
+// public/js/loginAPI.js
 
-  frm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.getElementById('login-form').addEventListener('submit', async e => {
+  e.preventDefault();
 
-    // Lấy dữ liệu từ form
-    const formData = new FormData(frm);
-    const payload = {
-      maNV: formData.get('username'),
-      password: formData.get('password'),
-      role: formData.get('role')  // lấy thêm role từ combobox
-    };
+  const maNV     = e.target.maNV.value.trim();
+  const password = e.target.password.value.trim();
+  const role     = e.target.role ? e.target.role.value : null;  // nếu có select role
 
-    try {
-      const response = await fetch('/phpcoban/BMCSDL-Final/api/login', {
+  try {
+    // Gọi fetchWithRefresh từ global window
+    const resp = await window.fetchWithRefresh(
+      '/phpcoban/BMCSDL-Final/api/login',
+      {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      // Luôn parse JSON bất kể status
-      const result = await response.json();
-
-      if (!response.ok) {
-        // 4xx/5xx từ API → báo lỗi và dừng
-        DraculaModal.show({
-          title: 'Đăng nhập thất bại',
-          message: result.error || 'Sai mã nhân viên hoặc mật khẩu',
-        });
-        return;
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify({ maNV, password, role })
       }
+    );
 
-      // response.ok thì mới vào đây
-      if (result.success) {
-        DraculaModal.show({
-          title: 'Đăng nhập thành công',
-          message: 'Chào mừng bạn đã đăng nhập vào hệ thống!',
-        });
-        // Nếu cần token cho các request sau:
-        localStorage.setItem('token', result.token);
-        // Lưu luôn role vào localStorage để frontend điều khiển hiển thị
-        localStorage.setItem('role', payload.role);
-
-        setTimeout(() => {
-          window.location.href = 'profile.php';
-        }, 1500);
-      } else {
-        // Trường hợp API trả 200 nhưng success=false
-        DraculaModal.show({
-          title: 'Đăng nhập thất bại',
-          message: result.error || result.message || 'Sai mã nhân viên hoặc mật khẩu',
-        });
-      }
-    } catch (err) {
-      DraculaModal.show({
-        title: 'Lỗi kết nối',
-        message: 'Không thể kết nối tới server!',
-      });
+    // Đọc nguyên text để bắt lỗi JSON “bẩn”
+    const text = await resp.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      console.error('Invalid JSON response:', text);
+      throw new Error('Server trả về không đúng định dạng JSON');
     }
-  });
+
+    if (!resp.ok || !data.success) {
+      throw new Error(data.message || 'Đăng nhập thất bại');
+    }
+
+    // Lưu token + refreshToken
+    localStorage.setItem('token',        data.token);
+    localStorage.setItem('refreshToken', data.refreshToken);
+
+    DraculaModal.show({
+      title:   'Đăng nhập thành công',
+      message: 'Chuyển trang sau 1s…',
+      okText:  'OK'
+    });
+
+    setTimeout(() => window.location.href = 'profile.php', 1000);
+
+  } catch (err) {
+    console.error('Login error:', err);
+    DraculaModal.show({ title:'Lỗi kết nối', message: err.message, okText:'OK' });
+  }
 });

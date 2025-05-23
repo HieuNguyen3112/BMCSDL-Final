@@ -1,55 +1,48 @@
 // public/JS/logoutAPI.js
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.addEventListener('click', async (e) => {
-    const btn = e.target.closest('[data-action="logout"], #logout-btn');
-    if (!btn) return;
-
-    e.preventDefault();
-
+  async function performLogout() {
     try {
-      // Gọi đúng tới route /api/logout
-      const resp = await fetch('api/logout', {
-        method: 'GET',
-        credentials: 'include'
-      });
+      const token   = localStorage.getItem('token');
+      const options = { method: 'GET', credentials: 'include' };
+      if (token) options.headers = { 'Authorization': `Bearer ${token}` };
 
-      // Nếu server trả về lỗi HTTP
-      if (!resp.ok) {
-        throw new Error(`HTTP ${resp.status}`);
-      }
+      const resp = await fetch('/phpcoban/BMCSDL-Final/api/logout', options);
+
+      // Xóa token sau khi gọi API
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
 
       const contentType = resp.headers.get('Content-Type') || '';
-      // Xóa token cục bộ trước để chắc chắn
-      localStorage.removeItem('token');
-
-      // Nếu là API trả JSON (có Bearer token)
       if (contentType.includes('application/json')) {
         const body = await resp.json();
-        DraculaModal.show({
-          title: 'Đăng xuất thành công',
-          message: body.message || 'Bạn đã đăng xuất khỏi hệ thống.'
+        await DraculaModal.show({
+          title:   'Đăng xuất thành công',
+          message: body.message  || 'Bạn đã đăng xuất khỏi hệ thống.',
+          okText:  'OK'
         });
         setTimeout(() => {
-          // redirect theo server trả về
           window.location.replace(body.redirect || 'signin.php');
         }, 1200);
       } else {
-        // Trường hợp header('Location: …')—fetch sẽ follow và trả HTML
-        DraculaModal.show({
-          title: 'Đăng xuất thành công',
-          message: 'Bạn đã đăng xuất khỏi hệ thống.'
+        await DraculaModal.show({
+          title:   'Đăng xuất thành công',
+          message: 'Bạn đã đăng xuất khỏi hệ thống.',
+          okText:  'OK'
         });
         setTimeout(() => {
           window.location.replace('signin.php');
         }, 1200);
       }
-
     } catch (err) {
       console.error('Lỗi khi gọi logout API:', err);
-      DraculaModal.show({
-        title: 'Lỗi đăng xuất',
-        message: 'Không thể kết nối tới server.'
+      await DraculaModal.show({
+        title:   'Lỗi đăng xuất',
+        message: 'Không thể kết nối tới server.',
+        okText:  'OK'
       });
     }
-  });
+  }
+
+  // CHỈ lắng nghe event custom doLogout
+  document.addEventListener('doLogout', performLogout);
 });

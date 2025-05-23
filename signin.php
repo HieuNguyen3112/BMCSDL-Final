@@ -24,7 +24,7 @@ require 'template/header.php';
         <form id="login-form">
           <div class="mb-3">
             <label class="form-label">Mã nhân viên</label>
-            <input type="text" name="username" class="form-control" placeholder="Mã nhân viên của bạn" required>
+            <input type="text" name="maNV" class="form-control" placeholder="Mã nhân viên của bạn" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Mật khẩu</label>
@@ -68,5 +68,6 @@ require 'template/header.php';
 
 <!-- Chỉ import duy nhất loginAPI.js -->
 <script src="public/JS/dropdownLogin.js"></script>
+<script src="public/js/fetchWithRefresh.js"></script>
 <script src="public/JS/loginAPI.js"></script>
 <?php require 'template/footer.php'; ?>

@@ -1,14 +1,16 @@
 <?php
 // controller/AuthController.php
 require_once __DIR__ . '/../model/UserModel.php';
+ini_set('display_errors', 0);
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
 class AuthController
 {
     protected $db;
     protected $userModel;
 
-    private $tokenTTL         = 900;  // Thời gian hiệu lực token (giây) = 15 phút
-    private $refreshThreshold = 300;  // Ngưỡng làm mới token (giây) = 5 phút
+    private $tokenTTL         = 3600;  // Thời gian hiệu lực token (giây) = 15 phút
+    private $refreshTTL       = 604800;  // Ngưỡng làm mới token (giây) = 7 phút
 
     public function __construct($conn)
     {
@@ -94,12 +96,45 @@ class AuthController
         // 4) nếu hợp lệ, issue token và trả về
         $_SESSION['user']  = $user;
         $this->issueToken();  // phương thức của bạn vẫn dùng
+        $this->issueRefreshToken();
         echo json_encode([
             'success' => true,
             'token'   => $_SESSION['token'],
+            'refreshToken' => $_SESSION['refresh_token'],
             'expires' => $_SESSION['token_exp'],
             'data'    => $user
         ], JSON_UNESCAPED_UNICODE);
+    }
+
+    // Mới: API trả access token mới
+    public function apiRefresh()
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        $input = json_decode(file_get_contents('php://input'), true);
+        $sentRT = trim($input['refreshToken'] ?? '');
+
+        if (
+          empty($_SESSION['refresh_token'])
+          || $sentRT !== $_SESSION['refresh_token']
+          || time() > ($_SESSION['refresh_token_exp'] ?? 0)
+        ) {
+          http_response_code(401);
+          echo json_encode([
+            'success' => false,
+            'message' => 'Refresh token không hợp lệ hoặc đã hết hạn.'
+          ]);
+          return;
+        }
+
+        // Issue mới access + refresh
+        $this->issueToken();
+        $this->issueRefreshToken();
+        echo json_encode([
+          'success'      => true,
+          'token'        => $_SESSION['token'],
+          'refreshToken' => $_SESSION['refresh_token'],
+          'expires'      => $_SESSION['token_exp']
+        ]);
     }
 
     // Trang thông tin cá nhân (chỉ cho phép nếu đã đăng nhập)
@@ -153,6 +188,13 @@ class AuthController
     {
         $_SESSION['token']     = bin2hex(random_bytes(16));
         $_SESSION['token_exp'] = time() + $this->tokenTTL;
+    }
+
+    // Mới: sinh refresh token
+    private function issueRefreshToken()
+    {
+        $_SESSION['refresh_token']     = bin2hex(random_bytes(32));
+        $_SESSION['refresh_token_exp'] = time() + $this->refreshTTL;
     }
 
     // Kiểm tra token còn hiệu lực

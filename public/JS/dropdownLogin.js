@@ -1,8 +1,13 @@
+// File: public/js/dropdownLogin.js
+
 document.addEventListener('DOMContentLoaded', () => {
-  const select = document.getElementById('role-select');
-  const trigger = select.querySelector('.custom-select__trigger');
-  const options = select.querySelectorAll('.custom-option');
-  const hiddenInput = document.getElementById('role-input');
+  const select       = document.getElementById('role-select');
+  if (!select) return;
+
+  const trigger      = select.querySelector('.custom-select__trigger');
+  const optionsPanel = select.querySelector('.custom-options');
+  const options      = optionsPanel.querySelectorAll('.custom-option');
+  const hiddenInput  = document.getElementById('role-input');
 
   // Mở / đóng dropdown
   trigger.addEventListener('click', () => {
@@ -14,13 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     option.addEventListener('click', () => {
       const value = option.getAttribute('data-value');
       const label = option.textContent;
-      // Cập nhật label hiển thị
       trigger.querySelector('span').textContent = label;
-      // Cập nhật hidden input để formData.get('role') có giá trị
       hiddenInput.value = value;
-      // đóng dropdown
       select.classList.remove('open');
     });
+  });
+
+  // CHẶN việc click scrollbar (mousedown) làm đóng dropdown
+  optionsPanel.addEventListener('mousedown', e => {
+    e.stopPropagation();
   });
 
   // Đóng khi click ngoài

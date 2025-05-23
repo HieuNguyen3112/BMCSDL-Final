@@ -1,40 +1,44 @@
 // public/JS/authNavbar.js
 document.addEventListener('DOMContentLoaded', () => {
-  // nút Đăng nhập/Đăng xuất (button)
-  const btnAuth = document.getElementById('nav-auth');
+  const btnAuth          = document.getElementById('nav-auth');
+  const btnSidebarLogout = document.getElementById('logout-btn');
 
-  // link Home và Làm việc (anchors)
-  const btnHome = document.querySelector('.nav-link[href="index.php"]');
-  const btnWork = document.querySelector('.nav-link[href="tasks.php"]');
-
-  const token    = localStorage.getItem('token');
-  const username = localStorage.getItem('username'); // giả định bạn lưu username khi login
-
-  // --- Thiết lập nút Auth ---
-  if (btnAuth) {
+  function handleAuthClick(e) {
+    e.preventDefault();
+    e.stopPropagation();            // NGĂN event click chồng chéo
+    const token = localStorage.getItem('token');
     if (token) {
-      btnAuth.textContent = 'Đăng xuất';
+      // chỉ phát event custom, không làm gì khác
+      document.dispatchEvent(new Event('doLogout'));
+    } else {
+      window.location.href = 'signin.php';
+    }
+  }
+
+  // Navbar button
+  if (btnAuth) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      btnAuth.textContent        = 'Đăng xuất';
       btnAuth.setAttribute('data-action', 'logout');
     } else {
-      btnAuth.textContent = 'Đăng nhập';
+      btnAuth.textContent        = 'Đăng nhập';
       btnAuth.setAttribute('data-action', 'login');
     }
-    btnAuth.addEventListener('click', e => {
-      e.preventDefault();
-      if (token) {
-        // phát sự kiện để logoutAPI.js bắt và xử lý
-        document.dispatchEvent(new Event('doLogout'));
-      } else {
-        window.location.href = 'signin.php';
-      }
-    });
+    btnAuth.addEventListener('click', handleAuthClick);
+  }
+
+  // Sidebar “Đăng xuất”
+  if (btnSidebarLogout) {
+    btnSidebarLogout.addEventListener('click', handleAuthClick);
   }
 
   // --- Home ---
+  const btnHome = document.querySelector('.nav-link[href="index.php"]');
   if (btnHome) {
     btnHome.addEventListener('click', e => {
       e.preventDefault();
-      if (token) {
+      if (localStorage.getItem('token')) {
         window.location.href = 'workspace.php';
       } else {
         DraculaModal.show({
@@ -47,10 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Làm việc ---
+  const btnWork = document.querySelector('.nav-link[href="tasks.php"]');
   if (btnWork) {
     btnWork.addEventListener('click', e => {
       e.preventDefault();
-      if (token) {
+      if (localStorage.getItem('token')) {
         window.location.href = 'profile.php';
       } else {
         DraculaModal.show({

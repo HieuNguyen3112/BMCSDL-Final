@@ -34,6 +34,7 @@
 </aside>
 <script src="public/JS/modal.js"></script>
 <script src="public/JS/createEmployeeSidebar.js"></script>
+<script src="public/js/fetchWithRefresh.js"></script>
 <script src="public/JS/logoutAPI.js"></script>
 
 

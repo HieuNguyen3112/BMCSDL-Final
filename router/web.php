@@ -48,6 +48,10 @@ $router->post('/api/employees/create', function() use ($conn) {
     (new EmployeeController($conn))->apiCreate();
 });
 
+// Refresh token
+$router->post('/api/refresh', function() use ($conn) {
+    (new AuthController($conn))->apiRefresh();
+});
 
 // 404
 $router->set404(function() {

@@ -10,14 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const role = body.data.TenRole;
         // Chỉ cho phép các role này nhìn thấy link Tạo mới nhân viên
         const allowed = [
-          'TruongPhongRole',
           'NhanVienNhanSuRole',
-          'NhanVienTaiVuRole',
-          'GiamDocRole'
+          'TruongPhongNhanSuRole',
         ];
-        if (!allowed.includes(role)) {
-          const li = document.getElementById('nav-create-employee');
-          if (li) li.style.display = 'none';
+        const li = document.getElementById('nav-create-employee');
+        if (li) {
+          // ẩn hẳn nếu role không nằm trong allowed
+          li.style.display = allowed.includes(role) ? '' : 'none';
         }
       })
       .catch(err => console.error('Lỗi kiểm tra quyền tạo nhân viên:', err));
