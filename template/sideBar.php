@@ -24,6 +24,12 @@
         <span class="sidebar-text">Tạo mới nhân viên</span>
       </a>
     </li>
+    <li id="nav-audit-log" class="sidebar-item<?php if (basename($_SERVER['PHP_SELF']) === 'auditLog.php') echo ' active'; ?>">
+      <a href="auditLog.php">
+        <i class="fa fa-clipboard-list"></i>
+        <span class="sidebar-text">Audit Log</span>
+      </a>
+    </li>
     <li class="sidebar-item">
       <a href="#" id="logout-btn" data-action="logout">
         <i class="fa fa-sign-out-alt"></i>
@@ -34,6 +40,7 @@
 </aside>
 <script src="public/JS/modal.js"></script>
 <script src="public/JS/createEmployeeSidebar.js"></script>
+<script src="public/js/auditLogSidebar.js"></script>
 <script src="public/js/fetchWithRefresh.js"></script>
 <script src="public/JS/logoutAPI.js"></script>
 

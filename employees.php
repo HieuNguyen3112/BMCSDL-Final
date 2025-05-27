@@ -102,6 +102,7 @@ require 'template/header.php';
   <script src="public/js/sidebarEmployees.js"></script>
   <script src="public/js/fetchWithRefresh.js"></script>
   <script src="public/js/employeesFetchNhanVienRole.js"></script>
+  <script src="public/js/editAPI.js"></script>
   <script src="public/js/editModal.js"></script>
   <script src="public/js/roleControl.js"></script>
 </div>

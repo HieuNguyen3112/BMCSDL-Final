@@ -1,0 +1,52 @@
+/* auditLog.css */
+
+/* Container chính */
+.auditlog-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: rgba(40, 40, 60, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+  
+  /* Tiêu đề căn giữa, màu tím nhẹ giống mục "Danh sách nhân viên" */
+  .auditlog-container h2 {
+    text-align: center;
+    color: #A77AC9;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Wrapper để scroll ngang khi cần */
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  
+  /* Dùng lại class .employees-table để giữ style chung */
+  .employees-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Thân bảng */
+  .employees-table th,
+  .employees-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    color: #E0E0E0;
+    font-size: 0.95rem;
+  }
+  
+  /* Header bảng */
+  .employees-table th {
+    background-color: rgba(255,255,255,0.1);
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+  
+  /* Xen kẽ màu nền */
+  .employees-table tr:nth-child(even) {
+    background: rgba(255,255,255,0.05);
+  }
+  

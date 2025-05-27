@@ -8,7 +8,7 @@ require 'template/header.php';
 <div class="main-content">
   <div class="login-wrapper">
     <div class="login-left">
-      <h1><span class="gradient-text">Nhóm 6</span> Quản lý nhân sự</h1>
+      <h1><span class="gradient-text">Nhóm 2</span> Quản lý nhân sự</h1>
       <p class="subtitle">Quản lý nhân sự cho doanh nghiệp.</p>
     </div>
     <div class="login-right">

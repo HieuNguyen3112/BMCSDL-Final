@@ -11,6 +11,7 @@ $router->setBasePath('/phpcoban/BMCSDL-Final');
 require_once __DIR__ . '/../controller/AuthController.php';
 require_once __DIR__ . '/../controller/ProfileController.php';
 require_once __DIR__ . '/../controller/EmployeeController.php';
+require_once __DIR__ . '/../controller/AuditLogController.php';
 // Nạp middlewhare
 // require_once __DIR__ . '/../middleware/AuthMiddleware.php';
 // require_once __DIR__ . '/../middleware/RoleMiddleware.php';
@@ -51,6 +52,11 @@ $router->post('/api/employees/create', function() use ($conn) {
 // Refresh token
 $router->post('/api/refresh', function() use ($conn) {
     (new AuthController($conn))->apiRefresh();
+});
+
+// Audit log
+$router->get('/api/audit-log', function() use ($conn) {
+    (new AuditLogController($conn))->apiGetAll();
 });
 
 // 404

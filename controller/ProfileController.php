@@ -1,14 +1,17 @@
 <?php
 // controller/ProfileController.php
 require_once __DIR__ . '/../model/UserModel.php';
+require_once __DIR__ . '/../model/AuditLogModel.php';
 
 class ProfileController
 {
     protected $userModel;
+    protected $auditLogModel;
 
     public function __construct(mysqli $conn)
     {
         $this->userModel = new UserModel($conn);
+        $this->auditLogModel = new AuditLogModel($conn);
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
@@ -24,6 +27,14 @@ class ProfileController
 
         $maNV = (int) $_SESSION['user']['MaNhanVien'];
         $user = $this->userModel->getById($maNV);
+        // Ghi audit log VIEW_PROFILE
+        $this->auditLogModel->write(
+                'VIEW_PROFILE',
+                'NHANVIEN',
+                $maNV,
+                null,
+                $user
+            );
         require __DIR__ . '/../view/profile.php';
     }
 
@@ -48,6 +59,15 @@ class ProfileController
 
         // **CHỖ NÀY**: thêm role từ session vào kết quả trả về
         $userInfo['TenRole'] = $_SESSION['user']['TenRole'];
+
+        // Ghi audit log VIEW_PROFILE API
+        $this->auditLogModel->write(
+                'VIEW_PROFILE',
+                'NHANVIEN',
+                $maNV,
+                null,
+                $userInfo
+            );
 
         echo json_encode([
             'success' => true,
@@ -84,6 +104,9 @@ class ProfileController
         $input = json_decode(file_get_contents('php://input'), true);
         $maNV  = (int) $_SESSION['user']['MaNhanVien'];
 
+         // Lấy oldData
+        $oldData = $this->userModel->getById($maNV);
+
         // Chỉ cho phép sửa 4 trường cơ bản
         $data = [
             'HoTen'       => trim($input['HoTen']       ?? ''),
@@ -103,6 +126,17 @@ class ProfileController
             ], JSON_UNESCAPED_UNICODE);
             return;
         }
+
+        // Lấy newData
+        $newData = $this->userModel->getById($maNV);
+        // Ghi audit log UPDATE PROFILE
+        $this->auditLogModel->write(
+            'UPDATE',
+            'NHANVIEN',
+            $maNV,
+            $oldData,
+            $newData
+        );
 
         // Nếu thành công, trả luôn bản ghi mới
         $updated = $this->userModel->getById($maNV);

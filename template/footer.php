@@ -9,7 +9,7 @@
             <div class="footer-newsletter">
                 <div class="container d-flex flex-wrap align-items-center justify-content-between">
                 <div class="newsletter-text">
-                    <small>NHÓM 6</small>
+                    <small>NHÓM 2</small>
                     <h5>QUẢN LÍ NHÂN SỰ</h5>
                 </div>
                 <form class="newsletter-form d-flex">

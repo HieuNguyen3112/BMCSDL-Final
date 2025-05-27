@@ -1,6 +1,8 @@
 <?php
 // controller/AuthController.php
 require_once __DIR__ . '/../model/UserModel.php';
+require_once __DIR__ . '/../model/AuditLogModel.php';
+
 ini_set('display_errors', 0);
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
@@ -8,6 +10,7 @@ class AuthController
 {
     protected $db;
     protected $userModel;
+    protected $auditLogModel;
 
     private $tokenTTL         = 3600;  // Thời gian hiệu lực token (giây) = 15 phút
     private $refreshTTL       = 604800;  // Ngưỡng làm mới token (giây) = 7 phút
@@ -16,6 +19,7 @@ class AuthController
     {
         $this->db        = $conn;
         $this->userModel = new UserModel($conn);
+        $this->auditLogModel = new AuditLogModel($conn);
     }
 
     // Hiển thị form đăng nhập web
@@ -42,6 +46,14 @@ class AuthController
         if ($user) {
             // Đăng nhập thành công: lưu thông tin user vào SESSION và tạo token
             $_SESSION['user'] = $user;
+            // Ghi audit log LOGIN
+            $this->auditLogModel->write(
+                'LOGIN',
+                'TAIKHOAN',
+                $user['MaNhanVien'],
+                null,
+                $user
+            );
             $this->issueToken();
             header('Location: /profile');
             exit;
@@ -95,6 +107,14 @@ class AuthController
 
         // 4) nếu hợp lệ, issue token và trả về
         $_SESSION['user']  = $user;
+        // Ghi audit log LOGIN (API)
+        $this->auditLogModel->write(
+            'LOGIN',
+            'TAIKHOAN',
+            $user['MaNhanVien'],
+            null,
+            $user
+        );
         $this->issueToken();  // phương thức của bạn vẫn dùng
         $this->issueRefreshToken();
         echo json_encode([
@@ -162,6 +182,21 @@ class AuthController
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'] 
                     ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] 
                     ?? '';
+
+        // Ghi audit log LOGOUT
+        $userId = $_SESSION['user']['MaNhanVien'] ?? 0;
+        $userName = $_SESSION['user']['HoTen']      ?? '';
+
+        // Viết log: model sẽ tự lấy thêm user_name, user_role từ session
+        if ($userId > 0) {
+            $this->auditLogModel->write(
+                'LOGOUT',
+                'TAIKHOAN',
+                $userId,
+                null,
+                null
+            );
+        }
 
         // 4) Xóa session
         $_SESSION = [];

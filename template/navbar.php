@@ -3,7 +3,7 @@
 <nav class="site-navbar">
   <div class="nav-left">
     <a class="navbar-brand">
-      <span class="gradient-text">Nhóm 6</span> Quản lý nhân sự
+      <span class="gradient-text">Nhóm 2</span> Quản lý nhân sự
     </a>
   </div>
   <div class="nav-center">

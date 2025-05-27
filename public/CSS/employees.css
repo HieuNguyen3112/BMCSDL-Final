@@ -20,7 +20,6 @@
   flex-direction: column;
   flex: 1 0 auto;
   margin-bottom: 200px;
-
 }
 
 /* Tiêu đề */
@@ -37,7 +36,7 @@
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   margin: auto;
   background: #21222c;
   padding: 1rem;
@@ -47,7 +46,7 @@
   overflow-y: auto;
   /* giới hạn chiều cao sao cho vẫn thấy header + footer */
   max-height: calc(100vh - 250px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   margin: auto;
 }
 
@@ -59,7 +58,9 @@
   border-collapse: separate;
   border-spacing: 0;
 }
-.employees-table thead tr { background: #282a36; }
+.employees-table thead tr {
+  background: #282a36;
+}
 .employees-table thead th {
   padding: 0.75rem 1rem;
   text-align: left;
@@ -67,25 +68,43 @@
   font-size: 0.95rem;
   color: #f8f8f2;
 }
-.employees-table tbody tr { background: #21222c; }
-.employees-table tbody tr:nth-child(even) { background: #232433; }
-.employees-table tbody tr:hover { background: #44475a; }
+.employees-table tbody tr {
+  background: #21222c;
+}
+.employees-table tbody tr:nth-child(even) {
+  background: #232433;
+}
+.employees-table tbody tr:hover {
+  background: #44475a;
+}
 .employees-table td {
   padding: 0.6rem 1rem;
   color: #f8f8f2;
   font-size: 0.9rem;
   border-top: 1px solid #44475a;
 }
-.employees-table td + td { border-left: 1px solid #44475a; }
+.employees-table td + td {
+  border-left: 1px solid #44475a;
+}
 
 /* Bo góc */
-.employees-table thead th:first-child { border-top-left-radius: 6px; }
-.employees-table thead th:last-child { border-top-right-radius: 6px; }
-.employees-table tbody tr:last-child td:first-child { border-bottom-left-radius: 6px; }
-.employees-table tbody tr:last-child td:last-child { border-bottom-right-radius: 6px; }
+.employees-table thead th:first-child {
+  border-top-left-radius: 6px;
+}
+.employees-table thead th:last-child {
+  border-top-right-radius: 6px;
+}
+.employees-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+.employees-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
 
 /* Responsive (nếu cần) */
-@media (max-width:768px) { /* … giữ nguyên code responsive nếu có */ }
+@media (max-width: 768px) {
+  /* … giữ nguyên code responsive nếu có */
+}
 
 /* Modal hiển thị thông tin */
 .modal-overlay {
@@ -93,9 +112,11 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
 }
@@ -108,7 +129,7 @@
   padding: 20px 30px;
   border-radius: 12px;
   width: 400px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   position: relative;
 }
 .modal-content h3 {
@@ -148,8 +169,11 @@
 /* chung cho cả 2 modal (infoModal & editModal) */
 .modal-overlay {
   position: fixed;
-  top:0; left:0; right:0; bottom:0;
-  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
   display: none;
   justify-content: center;
   align-items: center;
@@ -167,12 +191,13 @@
   position: relative;
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 0 15px rgba(98,114,164,0.3);
+  box-shadow: 0 0 15px rgba(98, 114, 164, 0.3);
 }
 /* nút đóng */
 .modal-content .close-btn {
   position: absolute;
-  top: 1rem; right: 1rem;
+  top: 1rem;
+  right: 1rem;
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -190,7 +215,7 @@
 /* form bên trong */
 .modal-content form .grid-2cols {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -214,7 +239,7 @@
 .modal-content form .form-group input:focus,
 .modal-content form .form-group select:focus {
   background: #3e3b62;
-  box-shadow: 0 0 0 2px rgba(98,114,164,0.5);
+  box-shadow: 0 0 0 2px rgba(98, 114, 164, 0.5);
   outline: none;
 }
 
@@ -230,7 +255,7 @@
   font-size: 0.95rem;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(98,114,164,0.3);
+  box-shadow: 0 4px 8px rgba(98, 114, 164, 0.3);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .modal-content form .btn-save:hover {
@@ -238,7 +263,7 @@
 }
 .modal-content form .btn-save:active {
   transform: scale(0.97);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* responsive nhỏ màn hình */
@@ -281,25 +306,25 @@
 /* ——————————————————————————
    Vẽ đường kẻ dọc giữa các cột header
    —————————————————————————— */
-   .employees-table thead th {
-    /* Vạch chắn bên phải mỗi th, trừ cái cuối */
-    border-right: 1px solid rgba(255,255,255,0.15);
-  }
-  
-  .employees-table thead th:last-child {
-    border-right: none;
-  }
-  
-  /* Optional: thêm nét chia giữa cả các ô dữ liệu */
-  .employees-table tbody td {
-    border-right: 1px solid rgba(255,255,255,0.08);
-  }
-  .employees-table tbody td:last-child {
-    border-right: none;
-  }
-  
-  /* Nét chân header đậm hơn */
-  .employees-table thead {
-    border-bottom: 2px solid rgba(255,255,255,0.2);
-  }
-  
+.employees-table thead th {
+  /* Vạch chắn bên phải mỗi th, trừ cái cuối */
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.employees-table thead th:last-child {
+  border-right: none;
+}
+
+/* Optional: thêm nét chia giữa cả các ô dữ liệu */
+.employees-table tbody td {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+.employees-table tbody td:last-child {
+  border-right: none;
+}
+
+/* Nét chân header đậm hơn */
+.employees-table thead {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+

@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.className = 'action-btn';
 
           // Nếu là Nhân viên thường hoặc Trưởng phòng => chỉ XEM
-          if (role === 'NhanVienRole' || role === 'TruongPhongRole') {
+          if (role === 'NhanVienRole' || role === 'TruongPhongRole' || role === 'NhanVienTaiVuRole') {
             btn.textContent = 'Xem';
             btn.addEventListener('click', () => {
               modalBody.innerHTML = `
