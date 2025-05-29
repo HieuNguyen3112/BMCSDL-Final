@@ -111,26 +111,21 @@ class EmployeeController
                 $p = [$dept];
             }
 
-            elseif ($myRole === 3) {
-                // Xem tất cả nhân viên trừ người cùng phòng nhân sự
+            elseif ($myRoleName === 'NhanVienNhanSuRole') {
                 $sql = "
-                    SELECT
-                        nv.MaNhanVien,
-                        nv.HoTen,
-                        nv.GioiTinh,
-                        DATE_FORMAT(nv.NgaySinh, '%d/%m/%Y') AS NgaySinh,
-                        nv.SoDienThoai,
-                        CAST(AES_DECRYPT(nv.Luong, 'nhom6')   AS CHAR(20)) AS Luong,
-                        CAST(AES_DECRYPT(nv.PhuCap, 'nhom6')   AS CHAR(20)) AS PhuCap,
-                        nv.MaSoThue,
-                        cv.TenChucVu,
-                        pb.TenPhong
+                    SELECT nv.MaNhanVien, nv.HoTen, nv.GioiTinh,
+                           DATE_FORMAT(nv.NgaySinh, '%d/%m/%Y') AS NgaySinh,
+                           nv.SoDienThoai,
+                           CAST(AES_DECRYPT(nv.Luong, 'nhom6') AS CHAR(20)) AS Luong,
+                           CAST(AES_DECRYPT(nv.PhuCap, 'nhom6') AS CHAR(20)) AS PhuCap,
+                           nv.MaSoThue, cv.TenChucVu, pb.TenPhong
                     FROM NHANVIEN nv
-                    JOIN CHUCVU   cv ON nv.MaChucVu = cv.MaChucVu
-                    JOIN PHONGBAN pb ON nv.MaPhong  = pb.MaPhong
+                    JOIN CHUCVU cv ON nv.MaChucVu = cv.MaChucVu
+                    JOIN PHONGBAN pb ON nv.MaPhong = pb.MaPhong
+                    WHERE pb.TenPhong != 'Phòng nhân sự'
                     ORDER BY nv.MaNhanVien
                 ";
-                $params = [];
+                $p = [];
             }
             elseif ($myRoleName === 'TruongPhongNhanSuRole') {
                 // Xem + chỉnh sửa tất cả nhân viên, trừ lương/phụ cấp của chính mình

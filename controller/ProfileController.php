@@ -60,15 +60,6 @@ class ProfileController
         // **CHỖ NÀY**: thêm role từ session vào kết quả trả về
         $userInfo['TenRole'] = $_SESSION['user']['TenRole'];
 
-        // Ghi audit log VIEW_PROFILE API
-        $this->auditLogModel->write(
-                'VIEW_PROFILE',
-                'NHANVIEN',
-                $maNV,
-                null,
-                $userInfo
-            );
-
         echo json_encode([
             'success' => true,
             'data'    => $userInfo
